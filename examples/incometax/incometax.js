@@ -2468,169 +2468,6 @@ function execute(store,ids) {
                     calculation : calculation
                   }]);
               } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 = React.createElement(Component.IncomeTax,{
-                      income : scope.phpProgrammer
-                    });
-                    var _1 = _0 !== null ? pixiedustRuntime.castViewToString(store,_0) : null;
-                    return {
-                      result : _1,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "String",
-                    multiplicity : "1",
-                    expression : "@IncomeTax(phpProgrammer) {\n} as String",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 = React.createElement(Component.IncomeTax,{
-                      income : scope.phdStudent
-                    });
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "View",
-                    multiplicity : "1",
-                    expression : "@IncomeTax(phdStudent) {\n}",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 = React.createElement(Component.IncomeTax,{
-                      income : scope.seniorDeveloper
-                    });
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "View",
-                    multiplicity : "1",
-                    expression : "@IncomeTax(seniorDeveloper) {\n}",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 = React.createElement(Component.IncomeTax,{
-                      income : scope.seniorDeveloper
-                    });
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "View",
-                    multiplicity : "1",
-                    expression : "@IncomeTax(seniorDeveloper) {\n}",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 ;
-                    if(scope.phpProgrammer != null) {
-                      var calc = calculateIncome_summary(state,scope.phpProgrammer);
-                      state = calc.state;
-                      _0 = calc.result;
-                    } else {
-                      _0 = null;
-                    }
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "String",
-                    multiplicity : "1",
-                    expression : "phpProgrammer.summary",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 ;
-                    if(scope.phdStudent != null) {
-                      var calc = calculateIncome_summary(state,scope.phdStudent);
-                      state = calc.state;
-                      _0 = calc.result;
-                    } else {
-                      _0 = null;
-                    }
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "String",
-                    multiplicity : "1",
-                    expression : "phdStudent.summary",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 ;
-                    if(scope.seniorDeveloper != null) {
-                      var calc = calculateIncome_summary(state,scope.seniorDeveloper);
-                      state = calc.state;
-                      _0 = calc.result;
-                    } else {
-                      _0 = null;
-                    }
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "String",
-                    multiplicity : "1",
-                    expression : "seniorDeveloper.summary",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
       } ) ();
   return result;
 }
@@ -3172,150 +3009,7 @@ module.exports.reducer = reducer;
 var Component =  ( function () {
         var oldScope = scope;
         return {
-          IncomeTax : Lifted(function IncomeTax(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _2 ;
-                  if(scope.income != null) {
-                    var calc = calculateIncome_name(state,scope.income);
-                    state = calc.state;
-                    _2 = calc.result;
-                  } else {
-                    _2 = null;
-                  }
-                  var _0 = React.createElement("h2",{
-                  },_2);
-                  var _4 = React.createElement(Component.IncomeForm,{
-                    income : scope.income
-                  });
-                  var _5 = React.createElement(Component.IncomeSummary,{
-                    income : scope.income
-                  });
-                  var _3 = React.createElement(Component.TwoColumn,{
-                    left : _4,
-                    right : _5
-                  });
-                  return {
-                    result : React.createElement('group',{
-                    },_0,_3),
-                    state : state
-                  };
-              },[]),
-          IncomeProperty : Lifted(function IncomeProperty(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _2 = React.createElement("td",{
-                  },scope.name);
-                  var _4 = React.createElement("td",{
-                  },scope.value);
-                  var _0 = React.createElement("tr",{
-                  },_2,_4);
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          IncomeForm : Lifted(function IncomeForm(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _4 = React.createElement("h4",{
-                    style : {
-                      marginBottom : "0px"
-                    }
-                  },"Monthly Salary");
-                  var _8 = getIncome_monthlySalary(state,scope.income);
-                  var _7 = React.createElement(imports["Native"].FloatInput,{
-                    value$identity :  ( function () {
-                            return scope.income;
-                        } ) (),
-                    value$setter : actionCreators["setIncome_monthlySalary"],
-                    value : _8
-                  });
-                  var _2 = React.createElement("label",{
-                  },_4,_7);
-                  var _11 = React.createElement("h4",{
-                    style : {
-                      marginBottom : "0px"
-                    }
-                  },"Holiday allowance");
-                  var _15 ;
-                  if(scope.income != null) {
-                    var calc = calculateIncome_holidayAllowance(state,scope.income);
-                    state = calc.state;
-                    _15 = calc.result;
-                  } else {
-                    _15 = null;
-                  }
-                  var _14 = React.createElement(imports["Native"].FloatInput,{
-                    value$identity :  ( function () {
-                            return scope.income;
-                        } ) (),
-                    value$setter : actionCreators["setIncome_holidayAllowance"],
-                    value : _15
-                  });
-                  var _9 = React.createElement("label",{
-                  },_11,_14);
-                  var _18 = React.createElement("h4",{
-                    style : {
-                      marginBottom : "0px"
-                    }
-                  },"Thirteenth month?");
-                  var _22 ;
-                  if(scope.income != null) {
-                    var calc = calculateIncome_thirteenthMonth(state,scope.income);
-                    state = calc.state;
-                    _22 = calc.result;
-                  } else {
-                    _22 = null;
-                  }
-                  var _21 = React.createElement(imports["Native"].BooleanInput,{
-                    value$identity :  ( function () {
-                            return scope.income;
-                        } ) (),
-                    value$setter : actionCreators["setIncome_thirteenthMonth"],
-                    value : _22
-                  });
-                  var _16 = React.createElement("label",{
-                  },_18,_21);
-                  var _25 = React.createElement("h4",{
-                    style : {
-                      marginBottom : "0px"
-                    }
-                  },"Lease car price");
-                  var _29 = getIncome_leaseCarPrice(state,scope.income);
-                  var _28 = React.createElement(imports["Native"].OptFloatInput,{
-                    value$identity :  ( function () {
-                            return scope.income;
-                        } ) (),
-                    value$setter : actionCreators["setIncome_leaseCarPrice"],
-                    value : _29
-                  });
-                  var _23 = React.createElement("label",{
-                  },_25,_28);
-                  var _32 = React.createElement("h4",{
-                    style : {
-                      marginBottom : "0px"
-                    }
-                  },"Lease car percent");
-                  var _36 = getIncome_leaseCarPercent(state,scope.income);
-                  var _35 = React.createElement(imports["Native"].OptFloatInput,{
-                    value$identity :  ( function () {
-                            return scope.income;
-                        } ) (),
-                    value$setter : actionCreators["setIncome_leaseCarPercent"],
-                    value : _36
-                  });
-                  var _30 = React.createElement("label",{
-                  },_32,_35);
-                  var _0 = React.createElement("div",{
-                    className : "pure-form"
-                  },_2,_9,_16,_23,_30);
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          IncomeSummary : Lifted(function IncomeSummary(props,state) {
+          IncomeSummary : Lifted(function IncomeSummary(props,state,store) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _6 = React.createElement("th",{
@@ -3438,7 +3132,7 @@ var Component =  ( function () {
                     state : state
                   };
               },[]),
-          TwoColumn : Lifted(function TwoColumn(props,state) {
+          TwoColumn : Lifted(function TwoColumn(props,state,store) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _2 = React.createElement("div",{
@@ -3452,6 +3146,149 @@ var Component =  ( function () {
                   },_2,_4);
                   return {
                     result : _0,
+                    state : state
+                  };
+              },[]),
+          IncomeProperty : Lifted(function IncomeProperty(props,state,store) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 = React.createElement("td",{
+                  },scope.name);
+                  var _4 = React.createElement("td",{
+                  },scope.value);
+                  var _0 = React.createElement("tr",{
+                  },_2,_4);
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          IncomeForm : Lifted(function IncomeForm(props,state,store) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _4 = React.createElement("h4",{
+                    style : {
+                      marginBottom : "0px"
+                    }
+                  },"Monthly Salary");
+                  var _8 = getIncome_monthlySalary(state,scope.income);
+                  var _7 = React.createElement(imports["Native"].FloatInput,{
+                    value$identity :  ( function () {
+                            return scope.income;
+                        } ) (),
+                    value$setter : actionCreators["setIncome_monthlySalary"],
+                    value : _8
+                  });
+                  var _2 = React.createElement("label",{
+                  },_4,_7);
+                  var _11 = React.createElement("h4",{
+                    style : {
+                      marginBottom : "0px"
+                    }
+                  },"Holiday allowance");
+                  var _15 ;
+                  if(scope.income != null) {
+                    var calc = calculateIncome_holidayAllowance(state,scope.income);
+                    state = calc.state;
+                    _15 = calc.result;
+                  } else {
+                    _15 = null;
+                  }
+                  var _14 = React.createElement(imports["Native"].FloatInput,{
+                    value$identity :  ( function () {
+                            return scope.income;
+                        } ) (),
+                    value$setter : actionCreators["setIncome_holidayAllowance"],
+                    value : _15
+                  });
+                  var _9 = React.createElement("label",{
+                  },_11,_14);
+                  var _18 = React.createElement("h4",{
+                    style : {
+                      marginBottom : "0px"
+                    }
+                  },"Thirteenth month?");
+                  var _22 ;
+                  if(scope.income != null) {
+                    var calc = calculateIncome_thirteenthMonth(state,scope.income);
+                    state = calc.state;
+                    _22 = calc.result;
+                  } else {
+                    _22 = null;
+                  }
+                  var _21 = React.createElement(imports["Native"].BooleanInput,{
+                    value$identity :  ( function () {
+                            return scope.income;
+                        } ) (),
+                    value$setter : actionCreators["setIncome_thirteenthMonth"],
+                    value : _22
+                  });
+                  var _16 = React.createElement("label",{
+                  },_18,_21);
+                  var _25 = React.createElement("h4",{
+                    style : {
+                      marginBottom : "0px"
+                    }
+                  },"Lease car price");
+                  var _29 = getIncome_leaseCarPrice(state,scope.income);
+                  var _28 = React.createElement(imports["Native"].OptFloatInput,{
+                    value$identity :  ( function () {
+                            return scope.income;
+                        } ) (),
+                    value$setter : actionCreators["setIncome_leaseCarPrice"],
+                    value : _29
+                  });
+                  var _23 = React.createElement("label",{
+                  },_25,_28);
+                  var _32 = React.createElement("h4",{
+                    style : {
+                      marginBottom : "0px"
+                    }
+                  },"Lease car percent");
+                  var _36 = getIncome_leaseCarPercent(state,scope.income);
+                  var _35 = React.createElement(imports["Native"].OptFloatInput,{
+                    value$identity :  ( function () {
+                            return scope.income;
+                        } ) (),
+                    value$setter : actionCreators["setIncome_leaseCarPercent"],
+                    value : _36
+                  });
+                  var _30 = React.createElement("label",{
+                  },_32,_35);
+                  var _0 = React.createElement("div",{
+                    className : "pure-form"
+                  },_2,_9,_16,_23,_30);
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          IncomeTax : Lifted(function IncomeTax(props,state,store) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 ;
+                  if(scope.income != null) {
+                    var calc = calculateIncome_name(state,scope.income);
+                    state = calc.state;
+                    _2 = calc.result;
+                  } else {
+                    _2 = null;
+                  }
+                  var _0 = React.createElement("h2",{
+                  },_2);
+                  var _4 = React.createElement(Component.IncomeForm,{
+                    income : scope.income
+                  });
+                  var _5 = React.createElement(Component.IncomeSummary,{
+                    income : scope.income
+                  });
+                  var _3 = React.createElement(Component.TwoColumn,{
+                    left : _4,
+                    right : _5
+                  });
+                  return {
+                    result : React.createElement('group',{
+                    },_0,_3),
                     state : state
                   };
               },[])

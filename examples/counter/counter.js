@@ -3,7 +3,7 @@ var ReactDOMServer = require('react-dom/server');
 var Lifted = require('pixiedust/components/Lifted');
 var pixiedustRuntime = require('pixiedust/runtime');
 var imports = {
-  "../components/CodeBlock" : require("../components/CodeBlock")
+  "../../components/CodeBlock" : require("../../components/CodeBlock")
 };
 var expression = require('expression');
 var constants = require('pixiedust-constants');
@@ -810,20 +810,48 @@ module.exports.reducer = reducer;
 var Component =  ( function () {
         var oldScope = scope;
         return {
+          Counter : Lifted(function Counter(props,state,store) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 = React.createElement("button",{
+                    onClick : scope["increment"](1)
+                  },"+");
+                  var _6 ;
+                  if(scope.c != null) {
+                    var calc = calculateCounter_value(state,scope.c);
+                    state = calc.state;
+                    _6 = calc.result;
+                  } else {
+                    _6 = null;
+                  }
+                  var _4 = React.createElement("span",{
+                  },_6);
+                  var _7 = React.createElement("button",{
+                    onClick : scope["increment"](-1)
+                  },"-");
+                  var _0 = React.createElement("div",{
+                  },_2,_4,_7);
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },["increment"]),
           Main : Lifted(function Main(props,state,store) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _0 = React.createElement(Component.Add,{
                     add : scope.add
                   });
-                  var _2 = React.createElement(Component.Add,{
+                  var _4 = React.createElement(Component.Add,{
                     add : scope.add
                   });
-                  var _3 = _2 !== null ? pixiedustRuntime.castViewToString(store,_2) : null;
-                  var _1 = React.createElement(imports["../components/CodeBlock"].CodeBlock,{
+                  var _5 = _4 !== null ? pixiedustRuntime.castViewToString(store,_4) : null;
+                  var _3 = React.createElement(imports["../../components/CodeBlock"].CodeBlock,{
                     language : "html",
-                    code : _3
+                    code : _5
                   });
+                  var _1 = React.createElement("div",{
+                  },_3);
                   return {
                     result : React.createElement('group',{
                     },_0,_1),
@@ -854,33 +882,7 @@ var Component =  ( function () {
                     },_0,_2,_4),
                     state : state
                   };
-              },[]),
-          Counter : Lifted(function Counter(props,state,store) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _2 = React.createElement("button",{
-                    onClick : scope["increment"](1)
-                  },"+");
-                  var _6 ;
-                  if(scope.c != null) {
-                    var calc = calculateCounter_value(state,scope.c);
-                    state = calc.state;
-                    _6 = calc.result;
-                  } else {
-                    _6 = null;
-                  }
-                  var _4 = React.createElement("span",{
-                  },_6);
-                  var _7 = React.createElement("button",{
-                    onClick : scope["increment"](-1)
-                  },"-");
-                  var _0 = React.createElement("div",{
-                  },_2,_4,_7);
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },["increment"])
+              },[])
         };
     } ) ();
 module.exports.Component = Component;

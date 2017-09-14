@@ -1345,73 +1345,7 @@ module.exports.reducer = reducer;
 var Component =  ( function () {
         var oldScope = scope;
         return {
-          TodoFooter : Lifted(function TodoFooter(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _4 ;
-                  if(scope.app != null) {
-                    var calc = calculateTodoApp_todosLeft(state,scope.app);
-                    state = calc.state;
-                    _4 = calc.result;
-                  } else {
-                    _4 = null;
-                  }
-                  var _5 =  ( _4 == null ? constants.EMPTY_ARRAY : [_4] ) .concat(" " == null ? constants.EMPTY_ARRAY : [" "]);
-                  var _6 = _5.join('');
-                  var _7 = _6 !== null ? "" + _6 : null;
-                  var _10 ;
-                  var _8 ;
-                  if(scope.app != null) {
-                    var calc = calculateTodoApp_todosLeft(state,scope.app);
-                    state = calc.state;
-                    _8 = calc.result;
-                  } else {
-                    _8 = null;
-                  }
-                  var _9 = _8 !== null ? _8 === 1 : null;
-                  if(_9) {
-                    _10 = "item";
-                  } else {
-                    _10 = "items";
-                  }
-                  var _11 =  ( _10 == null ? constants.EMPTY_ARRAY : [_10] ) .concat(" left" == null ? constants.EMPTY_ARRAY : [" left"]);
-                  var _12 = _11.join('');
-                  var _13 = _7 !== null && _12 !== null ? _7 + _12 : null;
-                  var _2 = React.createElement("span",{
-                    className : "todo-count"
-                  },_13);
-                  var _14 = React.createElement(Component.TodoFilters,{
-                    app : scope.app
-                  });
-                  var _20 ;
-                  var _15 ;
-                  if(scope.app != null) {
-                    var calc = calculateTodoApp_finishedTodos(state,scope.app);
-                    state = calc.state;
-                    _15 = calc.result;
-                  } else {
-                    _15 = constants.EMPTY_ARRAY;
-                  }
-                  var _16 = expression.count(_15);
-                  var _17 = _16 !== null ? _16 > 0 : null;
-                  if(_17) {
-                    var _18 = React.createElement("a",{
-                      className : "clear-completed",
-                      onClick : scope["clearCompleted"]()
-                    },"Clear completed");
-                    _20 = _18;
-                  } else {
-                    _20 = null;
-                  }
-                  var _0 = React.createElement("footer",{
-                    className : "footer"
-                  },_2,_14,_20);
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },["clearCompleted"]),
-          TodoFilters : Lifted(function TodoFilters(props,state) {
+          TodoFilters : Lifted(function TodoFilters(props,state,store) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _2 = React.createElement(Component.FilterType,{
@@ -1434,7 +1368,7 @@ var Component =  ( function () {
                     state : state
                   };
               },[]),
-          FilterType : Lifted(function FilterType(props,state) {
+          FilterType : Lifted(function FilterType(props,state,store) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _6 ;
@@ -1463,90 +1397,7 @@ var Component =  ( function () {
                     state : state
                   };
               },["setFilter"]),
-          BooleanInput : Lifted(function BooleanInput(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _0 = React.createElement("input",{
-                    type : "checkbox",
-                    className : scope.className,
-                    checked : scope.checked,
-                    onChange : scope["onChange"]()
-                  });
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          TodoItem : Lifted(function TodoItem(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _0 = getTodo_app(state,scope.todo);
-                  var _1 = getTodoApp_editing(state,_0);
-                  var _2 = _1 !== null && scope.todo !== null ? _1 === scope.todo : null;
-                  var _6 ;
-                  var _5 = getTodo_finished(state,scope.todo);
-                  if(_5) {
-                    _6 = "completed";
-                  } else {
-                    _6 = "";
-                  }
-                  var _12 ;
-                  var _10 ;
-                  var _7 = getTodo_app(state,scope.todo);
-                  var _8 = getTodoApp_editing(state,_7);
-                  var _9 = _8 !== null && scope.todo !== null ? _8 === scope.todo : null;
-                  if(_9 !== null) {
-                    _10 = _9;
-                  } else {
-                    _10 = false;
-                  }
-                  if(_10) {
-                    _12 = " editing";
-                  } else {
-                    _12 = "";
-                  }
-                  var _13 =  ( _6 == null ? constants.EMPTY_ARRAY : [_6] ) .concat(_12 == null ? constants.EMPTY_ARRAY : [_12]);
-                  var _17 = getTodo_finished(state,scope.todo);
-                  var _16 = React.createElement(Component.BooleanInput,{
-                    checked : _17,
-                    className : "toggle",
-                    onChange : scope.toggleFinished
-                  });
-                  var _20 = getTodo_task(state,scope.todo);
-                  var _18 = React.createElement("label",{
-                    onDoubleClick : scope["editTodo"]()
-                  },_20);
-                  var _21 = React.createElement("button",{
-                    className : "destroy",
-                    onClick : scope["removeTodo"]()
-                  });
-                  var _14 = React.createElement("div",{
-                    className : "view"
-                  },_16,_18,_21);
-                  var _24 = getTodo_task(state,scope.todo);
-                  var _25 = getTodo_app(state,scope.todo);
-                  var _26 = getTodoApp_editing(state,_25);
-                  var _27 = _26 !== null && scope.todo !== null ? _26 === scope.todo : null;
-                  var _23 = React.createElement(imports["pixiedust/components/native/inputs"].AutoFocusStringInput,{
-                    value$identity :  ( function () {
-                            return scope.todo;
-                        } ) (),
-                    value$setter : actionCreators["setTodo_task"],
-                    value : _24,
-                    className : "edit",
-                    visible : _27,
-                    onSubmit : scope.finishEditing
-                  });
-                  var _3 = React.createElement("li",{
-                    className : _13
-                  },_14,_23);
-                  return {
-                    result : React.createElement('group',{
-                    },_2,_3),
-                    state : state
-                  };
-              },["toggleFinished","removeTodo","editTodo","finishEditing"]),
-          TodoApp : Lifted(function TodoApp(props,state) {
+          TodoApp : Lifted(function TodoApp(props,state,store) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _4 = React.createElement("h1",{
@@ -1651,35 +1502,159 @@ var Component =  ( function () {
                     result : _0,
                     state : state
                   };
-              },["toggleAll","createTodo"])
+              },["toggleAll","createTodo"]),
+          TodoItem : Lifted(function TodoItem(props,state,store) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _0 = getTodo_app(state,scope.todo);
+                  var _1 = getTodoApp_editing(state,_0);
+                  var _2 = _1 !== null && scope.todo !== null ? _1 === scope.todo : null;
+                  var _6 ;
+                  var _5 = getTodo_finished(state,scope.todo);
+                  if(_5) {
+                    _6 = "completed";
+                  } else {
+                    _6 = "";
+                  }
+                  var _12 ;
+                  var _10 ;
+                  var _7 = getTodo_app(state,scope.todo);
+                  var _8 = getTodoApp_editing(state,_7);
+                  var _9 = _8 !== null && scope.todo !== null ? _8 === scope.todo : null;
+                  if(_9 !== null) {
+                    _10 = _9;
+                  } else {
+                    _10 = false;
+                  }
+                  if(_10) {
+                    _12 = " editing";
+                  } else {
+                    _12 = "";
+                  }
+                  var _13 =  ( _6 == null ? constants.EMPTY_ARRAY : [_6] ) .concat(_12 == null ? constants.EMPTY_ARRAY : [_12]);
+                  var _17 = getTodo_finished(state,scope.todo);
+                  var _16 = React.createElement(Component.BooleanInput,{
+                    checked : _17,
+                    className : "toggle",
+                    onChange : scope.toggleFinished
+                  });
+                  var _20 = getTodo_task(state,scope.todo);
+                  var _18 = React.createElement("label",{
+                    onDoubleClick : scope["editTodo"]()
+                  },_20);
+                  var _21 = React.createElement("button",{
+                    className : "destroy",
+                    onClick : scope["removeTodo"]()
+                  });
+                  var _14 = React.createElement("div",{
+                    className : "view"
+                  },_16,_18,_21);
+                  var _24 = getTodo_task(state,scope.todo);
+                  var _25 = getTodo_app(state,scope.todo);
+                  var _26 = getTodoApp_editing(state,_25);
+                  var _27 = _26 !== null && scope.todo !== null ? _26 === scope.todo : null;
+                  var _23 = React.createElement(imports["pixiedust/components/native/inputs"].AutoFocusStringInput,{
+                    value$identity :  ( function () {
+                            return scope.todo;
+                        } ) (),
+                    value$setter : actionCreators["setTodo_task"],
+                    value : _24,
+                    className : "edit",
+                    visible : _27,
+                    onSubmit : scope.finishEditing
+                  });
+                  var _3 = React.createElement("li",{
+                    className : _13
+                  },_14,_23);
+                  return {
+                    result : React.createElement('group',{
+                    },_2,_3),
+                    state : state
+                  };
+              },["toggleFinished","removeTodo","editTodo","finishEditing"]),
+          BooleanInput : Lifted(function BooleanInput(props,state,store) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _0 = React.createElement("input",{
+                    type : "checkbox",
+                    className : scope.className,
+                    checked : scope.checked,
+                    onChange : scope["onChange"]()
+                  });
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          TodoFooter : Lifted(function TodoFooter(props,state,store) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _4 ;
+                  if(scope.app != null) {
+                    var calc = calculateTodoApp_todosLeft(state,scope.app);
+                    state = calc.state;
+                    _4 = calc.result;
+                  } else {
+                    _4 = null;
+                  }
+                  var _5 =  ( _4 == null ? constants.EMPTY_ARRAY : [_4] ) .concat(" " == null ? constants.EMPTY_ARRAY : [" "]);
+                  var _6 = _5.join('');
+                  var _7 = _6 !== null ? "" + _6 : null;
+                  var _10 ;
+                  var _8 ;
+                  if(scope.app != null) {
+                    var calc = calculateTodoApp_todosLeft(state,scope.app);
+                    state = calc.state;
+                    _8 = calc.result;
+                  } else {
+                    _8 = null;
+                  }
+                  var _9 = _8 !== null ? _8 === 1 : null;
+                  if(_9) {
+                    _10 = "item";
+                  } else {
+                    _10 = "items";
+                  }
+                  var _11 =  ( _10 == null ? constants.EMPTY_ARRAY : [_10] ) .concat(" left" == null ? constants.EMPTY_ARRAY : [" left"]);
+                  var _12 = _11.join('');
+                  var _13 = _7 !== null && _12 !== null ? _7 + _12 : null;
+                  var _2 = React.createElement("span",{
+                    className : "todo-count"
+                  },_13);
+                  var _14 = React.createElement(Component.TodoFilters,{
+                    app : scope.app
+                  });
+                  var _20 ;
+                  var _15 ;
+                  if(scope.app != null) {
+                    var calc = calculateTodoApp_finishedTodos(state,scope.app);
+                    state = calc.state;
+                    _15 = calc.result;
+                  } else {
+                    _15 = constants.EMPTY_ARRAY;
+                  }
+                  var _16 = expression.count(_15);
+                  var _17 = _16 !== null ? _16 > 0 : null;
+                  if(_17) {
+                    var _18 = React.createElement("a",{
+                      className : "clear-completed",
+                      onClick : scope["clearCompleted"]()
+                    },"Clear completed");
+                    _20 = _18;
+                  } else {
+                    _20 = null;
+                  }
+                  var _0 = React.createElement("footer",{
+                    className : "footer"
+                  },_2,_14,_20);
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },["clearCompleted"])
         };
     } ) ();
 module.exports.Component = Component;
-function TodoFooter_clearCompleted(state,action) {
-  var newState = state;
-  scoped(scope,_.assign({
-  },action.props,{
-  }),function (scope) {
-          scoped(scope,{
-            $this : scope.app
-          },function (scope) {
-                  var _1 = getTodoApp_todos(state,scope["$this"]);
-                  var _2 ;
-                  if(scope["$this"] != null) {
-                    var calc = calculateTodoApp_finishedTodos(state,scope["$this"]);
-                    state = calc.state;
-                    _2 = calc.result;
-                  } else {
-                    _2 = constants.EMPTY_ARRAY;
-                  }
-                  var _3 = _.difference(_1,_2);
-                  newState = setTodoApp_todos(newState,scope["$this"],_3);
-              });
-      });
-  return newState;
-}
-
-actions["TodoFooter_clearCompleted"] = TodoFooter_clearCompleted;
 function FilterType_setFilter(state,action) {
   var newState = state;
   scoped(scope,_.assign({
@@ -1695,6 +1670,70 @@ function FilterType_setFilter(state,action) {
 }
 
 actions["FilterType_setFilter"] = FilterType_setFilter;
+function TodoApp_toggleAll(state,action) {
+  var newState = state;
+  scoped(scope,_.assign({
+  },action.props,{
+  }),function (scope) {
+          scoped(scope,{
+            $this : scope.app
+          },function (scope) {
+                  var _1 = getTodoApp_todos(state,scope["$this"]);
+                  for (var _2 = 0 ; _2 < _1.length ; _2++) {
+                    scoped(scope,{
+                      $this : _1[_2]
+                    },function (scope) {
+                            var _4 ;
+                            if(scope.app != null) {
+                              var calc = calculateTodoApp_allFinished(state,scope.app);
+                              state = calc.state;
+                              _4 = calc.result;
+                            } else {
+                              _4 = null;
+                            }
+                            var _5 = !_4;
+                            newState = setTodo_finished(newState,scope["$this"],_5);
+                        });
+                  }
+              });
+      });
+  return newState;
+}
+
+actions["TodoApp_toggleAll"] = TodoApp_toggleAll;
+function TodoApp_createTodo(state,action) {
+  var newState = state;
+  scoped(scope,_.assign({
+  },action.props,{
+    task : action.args[0]
+  }),function (scope) {
+          var _2 = {
+            id : pixiedustRuntime.generateUniqueId()
+          };
+          newState = newState.update("Todo",function (table) {
+                  return table.set(_2.id,_2);
+              });
+          scoped(scope,{
+            $this : _2.id
+          },function (scope) {
+                  newState = setTodo_task(newState,scope["$this"],scope.task);
+                  newState = setTodo_finished(newState,scope["$this"],false);
+                  newState = setTodo_app(newState,scope["$this"],scope.app);
+              });
+          scoped(scope,{
+            t : _2.id
+          },function (scope) {
+                  scoped(scope,{
+                    $this : scope.app
+                  },function (scope) {
+                          newState = setTodoApp_input(newState,scope["$this"],"");
+                      });
+              });
+      });
+  return newState;
+}
+
+actions["TodoApp_createTodo"] = TodoApp_createTodo;
 function TodoItem_toggleFinished(state,action) {
   var newState = state;
   scoped(scope,_.assign({
@@ -1766,7 +1805,7 @@ function TodoItem_finishEditing(state,action) {
 }
 
 actions["TodoItem_finishEditing"] = TodoItem_finishEditing;
-function TodoApp_toggleAll(state,action) {
+function TodoFooter_clearCompleted(state,action) {
   var newState = state;
   scoped(scope,_.assign({
   },action.props,{
@@ -1775,58 +1814,19 @@ function TodoApp_toggleAll(state,action) {
             $this : scope.app
           },function (scope) {
                   var _1 = getTodoApp_todos(state,scope["$this"]);
-                  for (var _2 = 0 ; _2 < _1.length ; _2++) {
-                    scoped(scope,{
-                      $this : _1[_2]
-                    },function (scope) {
-                            var _4 ;
-                            if(scope.app != null) {
-                              var calc = calculateTodoApp_allFinished(state,scope.app);
-                              state = calc.state;
-                              _4 = calc.result;
-                            } else {
-                              _4 = null;
-                            }
-                            var _5 = !_4;
-                            newState = setTodo_finished(newState,scope["$this"],_5);
-                        });
+                  var _2 ;
+                  if(scope["$this"] != null) {
+                    var calc = calculateTodoApp_finishedTodos(state,scope["$this"]);
+                    state = calc.state;
+                    _2 = calc.result;
+                  } else {
+                    _2 = constants.EMPTY_ARRAY;
                   }
+                  var _3 = _.difference(_1,_2);
+                  newState = setTodoApp_todos(newState,scope["$this"],_3);
               });
       });
   return newState;
 }
 
-actions["TodoApp_toggleAll"] = TodoApp_toggleAll;
-function TodoApp_createTodo(state,action) {
-  var newState = state;
-  scoped(scope,_.assign({
-  },action.props,{
-    task : action.args[0]
-  }),function (scope) {
-          var _2 = {
-            id : pixiedustRuntime.generateUniqueId()
-          };
-          newState = newState.update("Todo",function (table) {
-                  return table.set(_2.id,_2);
-              });
-          scoped(scope,{
-            $this : _2.id
-          },function (scope) {
-                  newState = setTodo_task(newState,scope["$this"],scope.task);
-                  newState = setTodo_finished(newState,scope["$this"],false);
-                  newState = setTodo_app(newState,scope["$this"],scope.app);
-              });
-          scoped(scope,{
-            t : _2.id
-          },function (scope) {
-                  scoped(scope,{
-                    $this : scope.app
-                  },function (scope) {
-                          newState = setTodoApp_input(newState,scope["$this"],"");
-                      });
-              });
-      });
-  return newState;
-}
-
-actions["TodoApp_createTodo"] = TodoApp_createTodo;
+actions["TodoFooter_clearCompleted"] = TodoFooter_clearCompleted;

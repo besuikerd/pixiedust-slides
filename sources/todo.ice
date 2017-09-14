@@ -10,7 +10,7 @@ model
   entity Todo {
     task: String
     finished: Boolean
-    
+
     view: String = "<input type='checkbox' value=${finished}/><span>${task}</span>"
   }
 

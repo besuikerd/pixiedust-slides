@@ -2468,169 +2468,6 @@ function execute(store,ids) {
                     calculation : calculation
                   }]);
               } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 = React.createElement(Component.IncomeTax,{
-                      income : scope.phpProgrammer
-                    });
-                    var _1 = _0 !== null ? pixiedustRuntime.castViewToString(store,_0) : null;
-                    return {
-                      result : _1,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "String",
-                    multiplicity : "1",
-                    expression : "@IncomeTax(phpProgrammer) {\n} as String",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 = React.createElement(Component.IncomeTax,{
-                      income : scope.phdStudent
-                    });
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "View",
-                    multiplicity : "1",
-                    expression : "@IncomeTax(phdStudent) {\n}",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 = React.createElement(Component.IncomeTax,{
-                      income : scope.seniorDeveloper
-                    });
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "View",
-                    multiplicity : "1",
-                    expression : "@IncomeTax(seniorDeveloper) {\n}",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 = React.createElement(Component.IncomeTax,{
-                      income : scope.seniorDeveloper
-                    });
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "View",
-                    multiplicity : "1",
-                    expression : "@IncomeTax(seniorDeveloper) {\n}",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 ;
-                    if(scope.phpProgrammer != null) {
-                      var calc = calculateIncome_summary(state,scope.phpProgrammer);
-                      state = calc.state;
-                      _0 = calc.result;
-                    } else {
-                      _0 = null;
-                    }
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "String",
-                    multiplicity : "1",
-                    expression : "phpProgrammer.summary",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 ;
-                    if(scope.phdStudent != null) {
-                      var calc = calculateIncome_summary(state,scope.phdStudent);
-                      state = calc.state;
-                      _0 = calc.result;
-                    } else {
-                      _0 = null;
-                    }
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "String",
-                    multiplicity : "1",
-                    expression : "phdStudent.summary",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
-           ( function () {
-                  function calculation(state) {
-                    var _0 ;
-                    if(scope.seniorDeveloper != null) {
-                      var calc = calculateIncome_summary(state,scope.seniorDeveloper);
-                      state = calc.state;
-                      _0 = calc.result;
-                    } else {
-                      _0 = null;
-                    }
-                    return {
-                      result : _0,
-                      state : state
-                    };
-                  }
-                  
-                  var calc = calculation(store.getState());
-                  state = calc.state;
-                  result = result.concat([{
-                    type : "String",
-                    multiplicity : "1",
-                    expression : "seniorDeveloper.summary",
-                    value : calc.result,
-                    calculation : calculation
-                  }]);
-              } ) ();
       } ) ();
   return result;
 }
@@ -3172,7 +3009,49 @@ module.exports.reducer = reducer;
 var Component =  ( function () {
         var oldScope = scope;
         return {
-          IncomeForm : Lifted(function IncomeForm(props,state) {
+          IncomeTax : Lifted(function IncomeTax(props,state,store) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 ;
+                  if(scope.income != null) {
+                    var calc = calculateIncome_name(state,scope.income);
+                    state = calc.state;
+                    _2 = calc.result;
+                  } else {
+                    _2 = null;
+                  }
+                  var _0 = React.createElement("h2",{
+                  },_2);
+                  var _4 = React.createElement(Component.IncomeForm,{
+                    income : scope.income
+                  });
+                  var _5 = React.createElement("div",{
+                  });
+                  var _3 = React.createElement(Component.TwoColumn,{
+                    left : _4,
+                    right : _5
+                  });
+                  return {
+                    result : React.createElement('group',{
+                    },_0,_3),
+                    state : state
+                  };
+              },[]),
+          IncomeProperty : Lifted(function IncomeProperty(props,state,store) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 = React.createElement("td",{
+                  },scope.name);
+                  var _4 = React.createElement("td",{
+                  },scope.value);
+                  var _0 = React.createElement("tr",{
+                  },_2,_4);
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          IncomeForm : Lifted(function IncomeForm(props,state,store) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _4 = React.createElement("h4",{
@@ -3272,66 +3151,7 @@ var Component =  ( function () {
                     state : state
                   };
               },[]),
-          IncomeTax : Lifted(function IncomeTax(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _2 ;
-                  if(scope.income != null) {
-                    var calc = calculateIncome_name(state,scope.income);
-                    state = calc.state;
-                    _2 = calc.result;
-                  } else {
-                    _2 = null;
-                  }
-                  var _0 = React.createElement("h2",{
-                  },_2);
-                  var _4 = React.createElement(Component.IncomeForm,{
-                    income : scope.income
-                  });
-                  var _5 = React.createElement("div",{
-                  });
-                  var _3 = React.createElement(Component.TwoColumn,{
-                    left : _4,
-                    right : _5
-                  });
-                  return {
-                    result : React.createElement('group',{
-                    },_0,_3),
-                    state : state
-                  };
-              },[]),
-          TwoColumn : Lifted(function TwoColumn(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _2 = React.createElement("div",{
-                    className : "pure-u-1-2"
-                  },scope.left);
-                  var _4 = React.createElement("div",{
-                    className : "pure-u-1-2"
-                  },scope.right);
-                  var _0 = React.createElement("div",{
-                    className : "pure-g"
-                  },_2,_4);
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          IncomeProperty : Lifted(function IncomeProperty(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _2 = React.createElement("td",{
-                  },scope.name);
-                  var _4 = React.createElement("td",{
-                  },scope.value);
-                  var _0 = React.createElement("tr",{
-                  },_2,_4);
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          IncomeSummary : Lifted(function IncomeSummary(props,state) {
+          IncomeSummary : Lifted(function IncomeSummary(props,state,store) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _6 = React.createElement("th",{
@@ -3449,6 +3269,23 @@ var Component =  ( function () {
                   var _0 = React.createElement("table",{
                     className : "pure-table"
                   },_2,_10);
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          TwoColumn : Lifted(function TwoColumn(props,state,store) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 = React.createElement("div",{
+                    className : "pure-u-1-2"
+                  },scope.left);
+                  var _4 = React.createElement("div",{
+                    className : "pure-u-1-2"
+                  },scope.right);
+                  var _0 = React.createElement("div",{
+                    className : "pure-g"
+                  },_2,_4);
                   return {
                     result : _0,
                     state : state

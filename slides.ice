@@ -110,11 +110,9 @@ view
           }
         }
       }
-      
-      
+            
       counter2: Slide {
         slideshow = slideshow
-        previous = dataEncapsulation
         title = "Counter Example (not a counterexample)"
         content = @TwoColumn(
           @CodeBlockFetch("pix", "/sources/counter_model.pix")
@@ -122,6 +120,7 @@ view
             @CounterExample()
           }
         )
+        previous = dataEncapsulation
       }
       
       counter3: Slide {
@@ -172,7 +171,7 @@ view
         slideshow = slideshow
         previous = store1
         title = "Store"
-        content = @FixedWidthImage("/images/store0.svg", 800)
+        content = @Center { @FixedWidthImage("/images/store0.svg", 800) }
       }
       
       store3: Slide {
@@ -310,6 +309,17 @@ view
     }
   }
   
+  component Center(){
+    div[style={
+      display="flex"
+    , width="100%"
+    , height="100%"
+    , justifyContent="space-around"
+    }]{
+        children      
+    }
+  }
+  
   component VSpace(){
     br[style={height="50x=px"}]
   }
@@ -318,16 +328,19 @@ view
     div[style={
       padding = "30px 0 30px 0"
     }]{
-      children
+      div{
+        children
+      }
+      
     }
   }
   
   component FixedWidthImage(src: String, width: Int){
     img[
       src=src
-    , style={width="${width}px"}
-    , marginLeft="auto"
-    , marginRight="auto"
+    , style={
+      width="${width}px"
+    }
     ]
   }
   
