@@ -1,0 +1,24 @@
+model
+  entity TodoApp{
+    filter: String = "All" (default)
+    allFinished: Boolean = conj(todos.finished)
+    todosLeft: Int = (todos \ finishedTodos).count()
+    input: String = "" (default)
+  }
+
+  entity Todo {
+    task: String
+    finished: Boolean
+  }
+
+  relation TodoApp.editing ? <-> ? Todo.editing_inverse
+  relation TodoApp.todos * <-> 1 Todo.app
+  relation TodoApp.finishedTodos =
+    todos.filter(todo => todo.finished) <-> Todo.inverseFinishedTodos
+  relation TodoApp.visibleTodos =
+    switch {
+      case filter == "All" => todos
+      case filter == "Completed" => finishedTodos
+      case filter == "Not Completed" => todos \ finishedTodos
+      default => todos
+    } <-> Todo.inverseVisibleTodos
