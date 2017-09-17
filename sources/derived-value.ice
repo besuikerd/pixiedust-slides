@@ -1,0 +1,1 @@
+avgGrade   : Float?  = avg(enrollments.grade)

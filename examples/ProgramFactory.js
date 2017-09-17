@@ -50,9 +50,13 @@ var DevTools = createDevTools(
 );
 
 
-function ProgramFactory(program, name, duplicateStore){
+function ProgramFactory(program, name, duplicateStore, attachDebugger){
   if(duplicateStore === undefined){
     duplicateStore = false;
+  }
+
+  if(attachDebugger === undefined){
+    attachDebugger = true;
   }
 
   function createStore(){
@@ -91,7 +95,7 @@ function ProgramFactory(program, name, duplicateStore){
       return React.createElement(PixieDustProvider
       , {store: this.store.store }
       , React.createElement('div', {className: 'program-container'}
-        , React.createElement(DevTools)
+        , attachDebugger ? React.createElement(DevTools) : null
         , React.createElement('div', {className: 'program-header'}
           , React.createElement('h2', {className: 'program-name'}, name)
           , React.createElement('button', {className: 'program-reset-button', onClick: this.store.reset}, 'Reset')

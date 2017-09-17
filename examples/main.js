@@ -1,8 +1,10 @@
-var TodoExample = require('./todo');
+var todo = require('./todo');
 var ProgramFactory = require('./ProgramFactory')
 
+
 module.exports = {
-  TodoExample: TodoExample,
+  TodoExample: todo.Todo,
+  TodoDocked: todo.TodoDocked,
   TodoExampleDup: ProgramFactory(require('./todo/todo'), 'todo-example', true),
   CounterExample: ProgramFactory(require('./counter/counter'), 'counter-example'),
   IncomeTaxExample: ProgramFactory(require('./incometax/incometax'), 'incometax-program'),
