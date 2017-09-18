@@ -7,13 +7,18 @@ var Rx = require('rx');
 var CodeBlock = Class(React.Component, {
     constructor: function CodeBlock(){}
 
+  , componentDidMount: function(){
+    highlight.highlightBlock(this.refs.block)
+  }
   , componentDidUpdate: function (){
     highlight.highlightBlock(this.refs.block)
   }
 
   , render: function(){
     return React.createElement('pre',
-      {},
+      {
+        className: this.props.className
+      },
       React.createElement('code',
         {
           className: this.props.language
@@ -47,8 +52,9 @@ var CodeBlockFetch = Class(React.Component, {
 
   , render: function(){
     return React.createElement(CodeBlock, {
-      language: this.props.language,
-      code: this.state.code || null
+      language: this.props.language
+    , code: this.state.code || null
+    , className: this.props.className
     })
   }
 });

@@ -13,9 +13,9 @@
 
     relation TodoApp.todos * <-> 1 Todo.app
 
-    relation Todo.finishedTodos =
+    relation TodoApp.finishedTodos =
       todos.filter(todo.finished) <-> Todo
-    relation Todo.visibleTodos =
+    relation TodoApp.visibleTodos =
       switch {
         case filter == "All" => todos
         case filter == "Completed" => finishedTodos

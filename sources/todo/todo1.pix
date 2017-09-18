@@ -1,10 +1,8 @@
-  model
-    entity TodoApp{
-    }
+entity TodoList{ }
 
-    entity Todo {
-      task: String
-      finished: Boolean = false (default)
-    }
+entity Todo {
+  task     : String
+  finished : Boolean
+}
 
-    relation TodoApp.todos * <-> 1 Todo.app
+relation TodoList.todos * <-> 1 Todo.list

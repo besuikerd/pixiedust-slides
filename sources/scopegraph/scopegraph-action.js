@@ -18,3 +18,4 @@ export function setJSONFormat(){
     format: JSON_FORMAT
   }
 }
+

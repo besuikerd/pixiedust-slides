@@ -1,43 +1,4 @@
-  model
-    entity TodoApp{
-+     input: String
-    }
-
-    entity Todo {
-      task: String
-      finished: Boolean = false (default)
-    }
-
-    relation TodoApp.todos * <-> 1 Todo.app
-
-+ imports
-+   pixiedust/components/native/inputs {
-+     component StringInput(ref value: String, onSubmit: Action[String])
-+   }
-
-  view
-    component TodoApp(app: TodoApp){
-+     action addTodo(task: String){
-+       t: Todo {
-+         app = app
-+         task = task
-+       }
-+       app { input = "" }
-+     }
-
-      h1 { "Todos" }
-      input[type="checkbox"]
-+     @StringInput(app.input, addTodo)
-      for(todo in todos) @TodoItem(todo)
-      @TodoFooter(app)
-    }
-
-    component TodoItem(todo: Todo) {
-      input[type="checkbox"]
-      label { todo.task }
-      button { "Remove" }
-    }
-
-    component TodoFooter(app: TodoApp){
-
-    }
+entity TodoList {
+  input  : String
+  filter : String
+}

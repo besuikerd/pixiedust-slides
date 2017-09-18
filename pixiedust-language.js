@@ -1,27 +1,59 @@
 var hljs = require('highlight.js');
 
+var param = {
+  className: 'type'
+, begin: '\\w+'
+};
+
+var ofType = {
+  begin: ':\\s*'
+, contains: [
+    param
+  ]
+};
+
+var componentName = {
+  className: 'variable'
+, begin: '\\w+'
+};
+
+
+var component = {
+  beginKeywords: 'component'
+, end: '\\)'
+, excludeEnd: true
+, contains: [
+    ofType
+  , componentName
+  ]
+};
+
 module.exports =
   function pix (hljs) {
     return {
-      case_insensitive: true, // language is case-insensitive
-      keywords: 'component model entity view action for in relation switch case default if else imports ref',
+      case_insensitive: false, // language is case-insensitive
+      keywords: 'entity model view action for in relation switch case default if else imports ref',
       contains: [
         {
           className: 'string'
         , begin: '"', end: '"'
-        },
-        {
+        }
+      , {
           className: 'meta'
         , begin: '^\\+'
-        },
-        {
+        }
+      , {
           className: 'number'
         , begin: '\\b\\d+'
-        },
-        {
-          className: 'type'
-        , begin: '(View|Int|Boolean|String|Float|Datetime|Action\\[.*\\])(?![\\w])'
         }
+      , {
+          className: 'variable'
+        , begin: '@'
+        , excludeBegin: true
+        , end: '.(?![\\w])'
+        }
+      , component
+      , ofType
       ]
     }
   }

@@ -22,9 +22,9 @@ imports
     component SlidesExample()
   }
   
-  ./components/CodeBlock {
+  ./components/CodeBlock as CodeBlock {
     component CodeBlock(language: String, code: String)
-    component CodeBlockFetch(language: String, url: String)
+    component CodeBlockFetch(language: String, url: String, className: String)
   }
 
 model
@@ -32,6 +32,7 @@ model
     totalSlides: Int = current.slideNumber + current.slidesLeft <+ 0
     
     slideNumbersVisible: Int = 30 (default)
+    showFooter: Boolean = false (default)
   }
 
   entity Slide {
@@ -49,7 +50,7 @@ model
         ) 
         ++ (allPrevious.count())
       )
-    nextVisible : Int = slideshow.slideNumbersVisible - prevVisible
+    nextVisible : Int = slideshow.slideNumbersVisible - prevVisible - 1
   }
   
   relation SlideShow.current ? <-> Slide.inverseCurrent
@@ -96,42 +97,27 @@ view
         slideshow = slideshow
         previous = intro
         title = "UI Pattern"
-        content = @Center { @FixedWidthImage("/images/ui.svg", 1000) }
+        content = @TwoColumn(
+          no value
+        , @FixedWidthImage("/images/ui.svg", 600)
+        )
       }
       
-      uiMVC : Slide {
+      uiExtended : Slide {
         slideshow = slideshow
         previous = ui
         title = "UI Pattern"
-        content = @Center { @FixedWidthImage("/images/ui-mvc.svg", 1000) }
+        content = @TwoColumn(
+          no value
+        , @FixedWidthImage("/images/ui-extended.svg", 600)
+        )
       }
       
-      uiMVVM : Slide {
+      uiExtended2 : Slide {
         slideshow = slideshow
-        previous = uiMVC
+        previous = uiExtended
         title = "UI Pattern"
-        content = @Center { @FixedWidthImage("/images/ui-mvvm.svg", 1000) }
-      }
-      
-      uiFlux: Slide {
-        slideshow = slideshow
-        previous = uiMVVM
-        title = "UI Pattern"
-        content = @Center { @FixedWidthImage("/images/ui-flux.svg", 1000) }
-      }
-      
-      uiElm: Slide {
-        slideshow = slideshow
-        previous = uiMVVM
-        title = "UI Pattern"
-        content = @Center { @FixedWidthImage("/images/ui-elm.svg", 1000) }
-      }
-      
-      uiProperties : Slide {
-        slideshow = slideshow
-        previous = uiElm
-        title = "UI Framework properties"
-        content =
+        content = @TwoColumn(
           @List {
             li { "Incremental Rendering" }
             li { "Composable views" }
@@ -140,210 +126,39 @@ view
             li { "Bidirectional mapping between data and view" }
             li { "Undo/redo (time travelling)" }
           }
-      }
-      
-      scopegraphVisualizer : Slide {
-        slideshow = slideshow
-        previous = uiProperties
-        title = "Scopegraph Visualizer"
-        content = 
-        iframe[
-          src="scopegraph-visualizer/index.html"
-        , style = {
-            width = "100%"
-          , height = "100%"
-          }
-        ]
-      }
-      
-      scopegraphVisualizer2 : Slide {
-        slideshow = slideshow
-        previous = scopegraphVisualizer
-        title = "Scopegraph Visualizer"
-        content = @ThreeColumn(
-          div{
-            h2{ "Actions" }
-            @CodeBlockFetch("js", "sources/scopegraph/scopegraph-action.js")
-          }
-        , no value
-        , no value
+        , @FixedWidthImage("/images/ui-extended.svg", 600)
         )
       }
       
-      scopegraphVisualizer3 : Slide {
+      todo: Slide {
         slideshow = slideshow
-        previous = scopegraphVisualizer2
-        title = "Scopegraph Visualizer"
-        content = @ThreeColumn(
-          div{
-            h2{ "Actions" }
-            @CodeBlockFetch("js", "sources/scopegraph/scopegraph-action.js")
-          }
-        , div{
-            h2{ "Reducer" }
-            @CodeBlockFetch("js", "sources/scopegraph/scopegraph-reducer.js")
-          }
-        , no value
-        )
-      }
-      
-      scopegraphVisualizer4 : Slide {
-        slideshow = slideshow
-        previous = scopegraphVisualizer3
-        title = "Scopegraph Visualizer"
-        content = @ThreeColumn(
-          div{
-            h2{ "Actions" }
-            @CodeBlockFetch("js", "sources/scopegraph/scopegraph-action.js")
-          }
-        , div{
-            h2{ "Reducer" }
-            @CodeBlockFetch("js", "sources/scopegraph/scopegraph-reducer.js")
-          }
-        , div{
-            h2{ "Derived Values" }
-            @CodeBlockFetch("js", "sources/scopegraph/scopegraph-selectors.js")
-          }
-        )
-      }
-      
-      derivedValues : Slide {
-        slideshow = slideshow
-        previous = scopegraphVisualizer4
-        title = "Derived values"
-        content = div[className="pure-g"]{
-          div[className="pure-u-1-3"]{
-            @CodeBlockFetch("pix", "sources/derived-value.ice")
-          }
-          div[className="pure-u-2-3"]{
-            h2 { "Reselect" }
-            @CodeBlockFetch("js", "sources/derived-value.js")
-            
-            h2 { "MobX" }
-            @CodeBlockFetch("js", "sources/derived-value-mobx.js")
-          }
-        }
-      }
-      
-      counter1: Slide {
-        slideshow = slideshow
-        previous = derivedValues
-        title = "Counter Example"
-        content = @TwoColumn(
-          @CodeBlockFetch("pix", "sources/counter_model.ice")
-        , no value
-        )
-      }
-            
-      counter2: Slide {
-        slideshow = slideshow
-        previous = counter1
-        title = "Counter Example"
-        content = @TwoColumn(
-          @CodeBlockFetch("pix", "sources/counter_model.ice")
-        , div {
-            @CounterExample()
-          }
-        )
-      }
-      
-      counter3: Slide {
-        slideshow = slideshow
-        previous = counter2
-        title = "Counter Example"
-        content = @TwoColumn(
-          @CodeBlockFetch("pix", "sources/counter_model.ice")
-        , div {
-            @CounterExample()
-            @Block {
-              @Image("/images/ui-no-interaction.svg")
-            }
-          }
-        )
-      }
-      
-      counter4: Slide {
-        slideshow = slideshow
-        previous = counter3
-        title = "Counter Example"
-        content = @TwoColumn(
-          @CodeBlockFetch("pix", "sources/counter_template.pix")
-        , div {
-            @CounterExample()
-            @Block {
-              @Image("/images/ui-no-interaction.svg")
-            }
-          }
-        )
-      }
-      
-      counter5: Slide {
-        slideshow = slideshow
-        previous = counter4
-        title = "Counter Example"
-        content = @TwoColumn(
-          @CodeBlockFetch("pix", "sources/counter_template_components.pix")
-        , div {
-            @CounterExample()
-            @Block {
-              @Image("/images/ui-no-interaction.svg")
-            }
-          }
-        )
-      }
-      
-      counter6: Slide {
-        slideshow = slideshow
-        previous = counter5
-        title = "Counter Example"
-        content = @TwoColumn(
-          @CodeBlockFetch("pix", "sources/counter.pix")
-        , div {
-            @CounterExample()
-            @Block {
-              @Image("/images/ui-small.svg")
-            }
-          }
-        )
-      }
-      
-      counter7: Slide {
-        slideshow = slideshow
-        previous = counter6
-        title = "Counter Example"
-        content = @TwoColumn(
-          @CodeBlockFetch("pix", "sources/counter.pix")
-        , div {
-            @CounterExample()
-            @Block {
-              @Image("/images/counter_vdom.png")
-            }
-          }
-        )
-      }
-      
-      counter8: Slide {
-        slideshow = slideshow
-        previous = counter7
-        title = "Counter Example"
-        content = @TwoColumn(
-          @CodeBlockFetch("pix", "sources/counter.pix")
-        , div {
-            @AddExample()
-            @VSpace()
-            @CodeBlockFetch("pix", "sources/add.pix")
-          }
-        )
-      }
-      
-      
-      todo1: Slide {
-        slideshow = slideshow
-        previous = counter8
+        previous = uiExtended2
         title = "Todo"
-        content = div {
-          @TodoExample()
-        }
+        content = @TodoExample()
+      }
+      
+      
+      todoRedux: Slide {
+        slideshow = slideshow
+        previous = todo
+        title = "Todo.js"
+        content = @FiveColumn(
+          @CodeBlockFetchTiny("js", "sources/todo/redux/reducer.js")
+        , @CodeBlockFetchTiny("js", "sources/todo/redux/view1.js")
+        , @CodeBlockFetchTiny("js", "sources/todo/redux/view2.js")
+        , @CodeBlockFetchTiny("js", "sources/todo/redux/view3.js")
+        , @CodeBlockFetchTiny("js", "sources/todo/redux/view4.js")
+        )
+      }
+      
+      todo1 : Slide {
+        slideshow = slideshow
+        previous = todoRedux
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo1.pix")
+        , @TodoExample()
+        )
       }
       
       todo2 : Slide {
@@ -351,7 +166,7 @@ view
         previous = todo1
         title = "Todo"
         content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo1.pix")
+          @CodeBlockFetch("pix", "sources/todo/todo2.pix")
         , @TodoExample()
         )
       }
@@ -361,7 +176,7 @@ view
         previous = todo2
         title = "Todo"
         content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo2.pix")
+          @CodeBlockFetch("pix", "sources/todo/todo3.pix")
         , @TodoExample()
         )
       }
@@ -371,7 +186,7 @@ view
         previous = todo3
         title = "Todo"
         content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo3.pix")
+          @CodeBlockFetch("pix", "sources/todo/todo4.pix")
         , @TodoExample()
         )
       }
@@ -381,7 +196,7 @@ view
         previous = todo4
         title = "Todo"
         content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo4.pix")
+          @CodeBlockFetch("pix", "sources/todo/todo5.pix")
         , @TodoExample()
         )
       }
@@ -391,7 +206,7 @@ view
         previous = todo5
         title = "Todo"
         content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo5.pix")
+          @CodeBlockFetch("pix", "sources/todo/todo6.pix")
         , @TodoExample()
         )
       }
@@ -401,7 +216,7 @@ view
         previous = todo6
         title = "Todo"
         content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo6.pix")
+          @CodeBlockFetch("pix", "sources/todo/todo7.pix")
         , @TodoExample()
         )
       }
@@ -411,7 +226,7 @@ view
         previous = todo7
         title = "Todo"
         content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo7.pix")
+          @CodeBlockFetch("pix", "sources/todo/todo8.pix")
         , @TodoExample()
         )
       }
@@ -421,7 +236,7 @@ view
         previous = todo8
         title = "Todo"
         content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo8.pix")
+          @CodeBlockFetch("pix", "sources/todo/todo9.pix")
         , @TodoExample()
         )
       }
@@ -431,7 +246,7 @@ view
         previous = todo9
         title = "Todo"
         content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo9.pix")
+          @CodeBlockFetch("pix", "sources/todo/todo10.pix")
         , @TodoExample()
         )
       }
@@ -441,7 +256,7 @@ view
         previous = todo10
         title = "Todo"
         content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo10.pix")
+          @CodeBlockFetch("pix", "sources/todo/todo11.pix")
         , @TodoExample()
         )
       }
@@ -451,16 +266,6 @@ view
         previous = todo11
         title = "Todo"
         content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo11.pix")
-        , @TodoExample()
-        )
-      }
-      
-      todo13 : Slide {
-        slideshow = slideshow
-        previous = todo12
-        title = "Todo"
-        content = @WideTwoColumn(
           @CodeBlockFetch("pix", "sources/todo/todo12.pix")
         , @TodoExample()
         )
@@ -468,7 +273,7 @@ view
       
       store1: Slide {
         slideshow = slideshow
-        previous = todo13
+        previous = todo9
         title = "Store"
         content = div{
           @CodeBlock("haskell", "type Reducer state action = (state, action) -> state")
@@ -515,40 +320,47 @@ view
         slideshow = slideshow
         previous = store6
         title = "Action types in PixieDust"
-        content = div {
+        content = 
           @TwoColumn( 
-            h3 { "Update field (bidirectional mappings)" } 
-          , @CodeBlock("json", "{\"type\": \"setEntity_field\", \"id\": someId, \"value\": someValue}")
+            @CodeBlockFetch("pix", "/sources/add.pix")
+          , div{
+              
+              @AddExample()
+            }
           )
-          @TwoColumn(
-            h3 { "Component actions" }
-          , @CodeBlock("json", "{\"type\": \"Component_action\", \"props\": [...], \"args\": [...]}")
-          )
-          @TwoColumn(
-            h3 { "Cache updates while rendering" }
-          , @CodeBlock("json", "{\"type\": \"cacheUpdate[Component]\", \"updatedState\": state}")
-          )
-          @VSpace()
-          @TwoColumn(
-            @AddExample()
-          , @CodeBlockFetch("pix", "/sources/add.pix")
-          )
-        }
       }
       
-      vdom: Slide {
+      actions2: Slide{
         slideshow = slideshow
         previous = actions
-        title = "Virtual DOM"
-        content = @FixedWidthImage("images/vdom.svg", 1600)
+        title = "Action types in PixieDust"
+        content = 
+          @TwoColumn( 
+            @CodeBlockFetch("pix", "/sources/add.pix")
+          , div{
+              @AddExample()
+              
+              @VSpace()
+              
+              h3 { "Update field (bidirectional mappings)" } 
+              @CodeBlock("js", "{\"type\": \"setEntity_field\", \"id\": someId, \"value\": someValue}")
+              
+              h3 { "Component actions" }
+              @CodeBlock("js", "{\"type\": \"Component_action\", \"props\": [...], \"args\": [...]}")
+          
+              h3 { "Cache updates while rendering" }
+              @CodeBlock("js", "{\"type\": \"cacheUpdate[Component]\", \"updatedState\": state}")
+            }
+          )
       }
+      
       
       incometax1: Slide{
         slideshow = slideshow
-        previous = vdom
+        previous = actions2
         title = "Lazy rendering"
         content = @TwoColumn(
-          @CodeBlockFetch("pix", "/sources/incometax.pix")
+          @CodeBlockFetchSmall("pix", "/sources/incometax.pix")
         , @IncomeTaxExample()
         )
       }
@@ -558,10 +370,17 @@ view
         previous = incometax1
         title = "Lazy rendering"
         content = @TwoColumn(
-          @CodeBlockFetch("pix", "/sources/incometax.pix")
+          @CodeBlockFetchSmall("pix", "/sources/incometax.pix")
         , @IncomeTaxNoSummaryExample()
         )
       }
+      
+//      vdom: Slide {
+//        slideshow = slideshow
+//        previous = actions2
+//        title = "Virtual DOM"
+//        content = @FixedWidthImage("images/vdom.svg", 1600)
+//      }
       
       
       
@@ -604,29 +423,41 @@ view
     action nextSlide(){ slide.slideshow { current = current.next } }
     action previousSlide(){ slide.slideshow { current = current.previous } }
     
-    footer[className="slide-footer"] {
-      @KeyboardListener(
-        if(slide.previous.count() != 0) previousSlide,
-        if(slide.next.count() != 0) nextSlide
-      )
-      
-      div[className="slide-count"]{
-        span { slide.slideNumber "/" slide.slideshow.totalSlides }
+    @KeyboardListener(
+      if(slide.previous.count() != 0) previousSlide,
+      if(slide.next.count() != 0) nextSlide
+    )
+    
+    if(slide.slideshow.showFooter)
+      footer[className="slide-footer"] {
+        div[className="slide-count"]{
+          span { slide.slideNumber "/" slide.slideshow.totalSlides }
+        }
+        div[className="slide-selector"]{
+          button[className="pure-button", disabled=slide.previous.count() == 0, onClick=setCurrent(slide.previous)]{ "<" }  
+          for(s in slide.selectPrevious) 
+            button[className="slide-selector-item pure-button", title=s.title, onClick=setCurrent(s)]{ s.slideNumber }
+          span[className="slide-selector-item pure-button pure-button-primary", title=slide.title] { slide.slideNumber }
+          for(s in slide.selectNext) 
+            button[className="slide-selector-item pure-button", title=s.title, onClick=setCurrent(s)]{ s.slideNumber }
+          button[className="pure-button", disabled=slide.next.count() == 0, onClick=setCurrent(slide.next)]{ ">" }
+        }
       }
-      div[className="slide-selector"]{
-        button[className="pure-button", disabled=slide.previous.count() == 0, onClick=setCurrent(slide.previous)]{ "<" }  
-        for(s in slide.selectPrevious) 
-          button[className="slide-selector-item pure-button", onClick=setCurrent(s)]{ s.slideNumber }
-        span[className="slide-selector-item pure-button pure-button-primary"] { slide.slideNumber }
-        for(s in slide.selectNext) 
-          button[className="slide-selector-item pure-button", title=s.title, onClick=setCurrent(s)]{ s.slideNumber }
-        button[className="pure-button", disabled=slide.next.count() == 0, onClick=setCurrent(slide.next)]{ ">" }
-      }
-    }
+  }
+  
+  component CodeBlockFetch(language: String, url: String){
+    @CodeBlock.CodeBlockFetch(language, url, "font-normal")
+  }
+  
+  component CodeBlockFetchSmall(language: String, url: String){
+    @CodeBlock.CodeBlockFetch(language, url, "font-small")
+  }
+  
+  component CodeBlockFetchTiny(language: String, url: String){
+    @CodeBlock.CodeBlockFetch(language, url, "font-tiny")
   }
   
   component Slide(slide: Slide){
-    @TodoDocked()
     div[className="slide"] {
       @SlideHeader(slide)
       div[className="slide-content"]{
@@ -639,7 +470,13 @@ view
   }
   
   component SlideHeader(slide: Slide) {
-    div [className="slide-header"]{
+    action toggleFooter(){
+      slide.slideshow {
+        showFooter = !showFooter
+      }
+    }
+  
+    div [className="slide-header", onClick=toggleFooter()]{
       h1 { slide.title }
       hr{}
     }
@@ -680,6 +517,44 @@ view
       }
     }
   }
+  
+  component FourColumn(v1: View, v2: View?, v3: View?, v4: View?){
+    div[className="pure-g"]{
+      div[className="pure-u-1-4"]{
+        v1
+      }
+      div[className="pure-u-1-4"]{
+        v2
+      }
+      div[className="pure-u-1-4"]{
+        v3
+      }
+      div[className="pure-u-1-4"]{
+        v4
+      }
+    }
+  }
+  
+  component FiveColumn(v1: View, v2: View?, v3: View?, v4: View?, v5: View?){
+    div[className="pure-g"]{
+      div[className="pure-u-1-5"]{
+        v1
+      }
+      div[className="pure-u-1-5"]{
+        v2
+      }
+      div[className="pure-u-1-5"]{
+        v3
+      }
+      div[className="pure-u-1-5"]{
+        v4
+      }
+      div[className="pure-u-1-5"]{
+        v5
+      }
+    }
+  }
+  
   
   component Center(){
     div[style={
