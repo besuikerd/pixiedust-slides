@@ -1,0 +1,29 @@
+  model
+    entity TodoApp{
+    }
+  
+    entity Todo {
+      task: String
+      finished: Boolean = false (default)
+    }
+  
+    relation TodoApp.todos * <-> 1 Todo.app
+  
++ view
++   component TodoApp(app: TodoApp){
++     h1 { "Todos" }
++     input[type="checkbox"]
++     input[type="text"]
++     for(todo in todos) @TodoItem(todo)
++     @TodoFooter(app)
++   }
+  
++   component TodoItem(todo: Todo) {
++     input[type="checkbox"]
++     label { todo.task }
++     button { "Remove" }
++   }
+
++   component TodoFooter(app: TodoApp){
++
++   }

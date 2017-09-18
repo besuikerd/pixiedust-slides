@@ -46,6 +46,7 @@ html, body {
 .slide-footer {
 	height: 52px;
 	width: 100%;
+	overflow-x: hidden;
 }
 
 .slide-selector {
@@ -56,6 +57,7 @@ html, body {
 .slide-selector-item {
 	flex-grow: 1;
 	text-align: center;
+	min-width: 50px;
 }
 .slide-selector-item-selected {
 	background-color: #00b3ee;

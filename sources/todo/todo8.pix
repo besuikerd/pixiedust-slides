@@ -1,0 +1,76 @@
+  model
+    entity TodoApp{
+      input: String
++     filter: String = "All" (default)
+      allFinished: Boolean = conj(todos.finished)
+    }
+
+    entity Todo {
+      task: String
+      finished: Boolean = false (default)
+    }
+
+    relation TodoApp.todos * <-> 1 Todo.app
+
++   relation Todo.finishedTodos =
++     todos.filter(todo.finished) <-> Todo
++   relation Todo.visibleTodos =
++     switch {
++       case filter == "All" => todos
++       case filter == "Completed" => finishedTodos
++       case filter == "Not Completed" => todos \ finishedTodos
++     } <-> Todo
+
+  imports
+    pixiedust/components/native/inputs {
+      component StringInput(ref value: String, onSubmit: Action[String])
+    }
+
+  view
+    component TodoApp(app: TodoApp){
+      action addTodo(task: String){
+        t: Todo {
+          app = app
+          task = task
+        }
+        app { input = "" }
+      }
+
+      action toggleAll(){
+        app.todos {
+          finished = !app.allFinished
+        }
+      }
+
+      h1 { "Todos" }
+      @BooleanInput(app.allFinished, toggleAll)
+      @StringInput(app.input, addTodo)
++     for(todo in app.visibleTodos) @TodoItem(todo)
+      @TodoFooter(app)
+    }
+
+    component TodoItem(todo: Todo) {
+      action toggleFinished(){
+        todo { finished = !finished }
+      }
+
+      action removeTodo(){
+        todo.app { todos = todos \ todo }
+      }
+
+      @BooleanInput(todo.finished, toggleFinished)
+      label { todo.task }
+      button[onClick=removeTodo()]{ "Remove" }
+    }
+
+    component TodoFooter(app: TodoApp){
+
+    }
+
+    component BooleanInput(checked: Boolean, onChange: Action[]) {
+      input[
+        type="checkbox"
+      , checked=checked
+      , onChange=onChange()
+      ]
+    }

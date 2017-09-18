@@ -30,6 +30,8 @@ imports
 model
   entity SlideShow{
     totalSlides: Int = current.slideNumber + current.slidesLeft <+ 0
+    
+    slideNumbersVisible: Int = 30 (default)
   }
 
   entity Slide {
@@ -38,6 +40,16 @@ model
     
     slideNumber : Int = previous.slideNumber + 1 <+ 1
     slidesLeft: Int = 1 + next.slidesLeft <+ 0
+    
+    prevVisible : Int = 
+      min(
+        max(
+          (slideshow.slideNumbersVisible /. 2)
+          ++ max(0 ++ (slideshow.slideNumbersVisible - (allNext.count())))
+        ) 
+        ++ (allPrevious.count())
+      )
+    nextVisible : Int = slideshow.slideNumbersVisible - prevVisible
   }
   
   relation SlideShow.current ? <-> Slide.inverseCurrent
@@ -46,8 +58,20 @@ model
   
   relation Slide.slideshow 1 <-> * SlideShow.slides
   
-  relation Slide.allPrevious = previous.allPrevious ++ this <+ this <-> Slide.inverseAllPrevious
-  relation Slide.allNext = this ++ next.allNext <+ this <-> Slide.inverseAllNext
+  relation Slide.allNext0 = this ++ next.allNext0 <+ this <-> Slide.inverseAllNext0
+  relation Slide.allPrevious0 = previous.allPrevious0 ++ this <+ this <-> Slide.inverseAllPrevious0
+  
+  relation Slide.allPrevious = allPrevious0 \ this <-> Slide.inverseAllPrevious
+  relation Slide.allNext =  allNext0 \ this <-> Slide.inverseAllNext
+  
+  relation Slide.selectPrevious = 
+    allPrevious.orderBy(s => s.slideNumber * -1).first(prevVisible).orderBy(s => s.slideNumber)
+      <-> Slide.inverseSelectPrevious
+      
+  relation Slide.selectNext = 
+    allNext.orderBy(s => s.slideNumber).first(nextVisible)
+      <-> Slide.inverseSelectNext
+  
   
 view
   component Main(slideshow: SlideShow) {
@@ -276,6 +300,9 @@ view
           @CodeBlockFetch("pix", "sources/counter.pix")
         , div {
             @CounterExample()
+            @Block {
+              @Image("/images/ui-small.svg")
+            }
           }
         )
       }
@@ -319,29 +346,129 @@ view
         }
       }
       
-      todo_model: Slide {
+      todo2 : Slide {
         slideshow = slideshow
         previous = todo1
-        title = "Todo Model"
-        content = @TwoColumn(
-          @CodeBlockFetch("pix", "/sources/todo_model.pix")
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo1.pix")
         , @TodoExample()
         )
       }
       
-      todo_view: Slide {
+      todo3 : Slide {
         slideshow = slideshow
-        previous = todo_model
-        title = "Todo View"
-        content = @TwoColumn(
-          @CodeBlockFetch("pix", "/sources/todo_view.pix")
+        previous = todo2
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo2.pix")
+        , @TodoExample()
+        )
+      }
+      
+      todo4 : Slide {
+        slideshow = slideshow
+        previous = todo3
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo3.pix")
+        , @TodoExample()
+        )
+      }
+      
+      todo5 : Slide {
+        slideshow = slideshow
+        previous = todo4
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo4.pix")
+        , @TodoExample()
+        )
+      }
+      
+      todo6 : Slide {
+        slideshow = slideshow
+        previous = todo5
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo5.pix")
+        , @TodoExample()
+        )
+      }
+      
+      todo7 : Slide {
+        slideshow = slideshow
+        previous = todo6
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo6.pix")
+        , @TodoExample()
+        )
+      }
+      
+      todo8 : Slide {
+        slideshow = slideshow
+        previous = todo7
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo7.pix")
+        , @TodoExample()
+        )
+      }
+      
+      todo9 : Slide {
+        slideshow = slideshow
+        previous = todo8
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo8.pix")
+        , @TodoExample()
+        )
+      }
+      
+      todo10 : Slide {
+        slideshow = slideshow
+        previous = todo9
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo9.pix")
+        , @TodoExample()
+        )
+      }
+      
+      todo11 : Slide {
+        slideshow = slideshow
+        previous = todo10
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo10.pix")
+        , @TodoExample()
+        )
+      }
+      
+      todo12 : Slide {
+        slideshow = slideshow
+        previous = todo11
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo11.pix")
+        , @TodoExample()
+        )
+      }
+      
+      todo13 : Slide {
+        slideshow = slideshow
+        previous = todo12
+        title = "Todo"
+        content = @WideTwoColumn(
+          @CodeBlockFetch("pix", "sources/todo/todo12.pix")
         , @TodoExample()
         )
       }
       
       store1: Slide {
         slideshow = slideshow
-        previous = todo_view
+        previous = todo13
         title = "Store"
         content = div{
           @CodeBlock("haskell", "type Reducer state action = (state, action) -> state")
@@ -488,10 +615,10 @@ view
       }
       div[className="slide-selector"]{
         button[className="pure-button", disabled=slide.previous.count() == 0, onClick=setCurrent(slide.previous)]{ "<" }  
-        for(s in slide.allPrevious \ slide) 
+        for(s in slide.selectPrevious) 
           button[className="slide-selector-item pure-button", onClick=setCurrent(s)]{ s.slideNumber }
         span[className="slide-selector-item pure-button pure-button-primary"] { slide.slideNumber }
-        for(s in slide.allNext \ slide) 
+        for(s in slide.selectNext) 
           button[className="slide-selector-item pure-button", title=s.title, onClick=setCurrent(s)]{ s.slideNumber }
         button[className="pure-button", disabled=slide.next.count() == 0, onClick=setCurrent(slide.next)]{ ">" }
       }
@@ -524,6 +651,17 @@ view
         left
       }
       div[className="pure-u-1-2"]{
+        right
+      }
+    }
+  }
+  
+  component WideTwoColumn(left: View?, right: View?){
+    div[className="pure-g"]{
+      div[className="pure-u-2-3"]{
+        left
+      }
+      div[className="pure-u-1-3"]{
         right
       }
     }

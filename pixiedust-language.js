@@ -11,6 +11,10 @@ module.exports =
         , begin: '"', end: '"'
         },
         {
+          className: 'meta'
+        , begin: '^\\+'
+        },
+        {
           className: 'number'
         , begin: '\\b\\d+'
         },
