@@ -1,9 +1,9 @@
-function invalidateFoo_attr(state, id){
-  state = invalidateFoo_der(state, id);
+function invalidateTodo_task(state, id){
+  state = invalidateTodo_pretty(state, id);
   return state;
 }
 
-function invalidateFoo_der(state, id) {
-  state = state.Foo_der.remove(id);
+function invalidateTodo_pretty(state, id) {
+  state = state.Todo_pretty.remove(id);
   return state;
 }

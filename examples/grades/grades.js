@@ -912,86 +912,86 @@ function init(state) {
   state = state.update("Student",function (table) {
           return table.set(bob.id,bob);
       });
-  var c1 = {
-    id : "c1"
-  };
-  state = state.update("Course",function (table) {
-          return table.set(c1.id,c1);
-      });
-  var c2 = {
-    id : "c2"
-  };
-  state = state.update("Course",function (table) {
-          return table.set(c2.id,c2);
-      });
   var charlie = {
     id : "charlie"
   };
   state = state.update("Student",function (table) {
           return table.set(charlie.id,charlie);
       });
-  var noname1 = {
-    id : "noname1"
+  var course1 = {
+    id : "course1"
   };
-  state = state.update("Submission",function (table) {
-          return table.set(noname1.id,noname1);
+  state = state.update("Course",function (table) {
+          return table.set(course1.id,course1);
       });
-  var noname2 = {
-    id : "noname2"
+  var course2 = {
+    id : "course2"
   };
-  state = state.update("Submission",function (table) {
-          return table.set(noname2.id,noname2);
+  state = state.update("Course",function (table) {
+          return table.set(course2.id,course2);
       });
-  var noname3 = {
-    id : "noname3"
+  var submission1 = {
+    id : "submission1"
   };
   state = state.update("Submission",function (table) {
-          return table.set(noname3.id,noname3);
+          return table.set(submission1.id,submission1);
       });
-  var noname4 = {
-    id : "noname4"
+  var submission2 = {
+    id : "submission2"
   };
   state = state.update("Submission",function (table) {
-          return table.set(noname4.id,noname4);
+          return table.set(submission2.id,submission2);
       });
-  var noname5 = {
-    id : "noname5"
+  var submission3 = {
+    id : "submission3"
   };
   state = state.update("Submission",function (table) {
-          return table.set(noname5.id,noname5);
+          return table.set(submission3.id,submission3);
+      });
+  var submission4 = {
+    id : "submission4"
+  };
+  state = state.update("Submission",function (table) {
+          return table.set(submission4.id,submission4);
+      });
+  var submission5 = {
+    id : "submission5"
+  };
+  state = state.update("Submission",function (table) {
+          return table.set(submission5.id,submission5);
       });
   state = setStudent_name(state,alice.id,"Alice");
-  state = addApp_courses(state,app.id,c1.id);
-  state = addApp_courses(state,app.id,c2.id);
-  state = setApp_selectedCourse(state,app.id,c1.id);
+  state = addApp_courses(state,app.id,course1.id);
+  state = addApp_courses(state,app.id,course2.id);
+  state = setApp_selectedCourse(state,app.id,course1.id);
   state = setStudent_name(state,bob.id,"Bob");
-  state = setCourse_name(state,c1.id,"Math");
-  state = addCourse_submissions(state,c1.id,noname1.id);
-  state = addCourse_submissions(state,c1.id,noname2.id);
-  state = addCourse_submissions(state,c1.id,noname3.id);
-  state = setCourse_name(state,c2.id,"History");
-  state = addCourse_submissions(state,c2.id,noname4.id);
-  state = addCourse_submissions(state,c2.id,noname5.id);
   state = setStudent_name(state,charlie.id,"Charlie");
-  state = setSubmission_student(state,noname1.id,alice.id);
-  state = setSubmission_student(state,noname2.id,bob.id);
-  state = setSubmission_student(state,noname3.id,charlie.id);
-  state = setSubmission_student(state,noname4.id,alice.id);
-  state = setSubmission_student(state,noname5.id,charlie.id);
+  state = setCourse_name(state,course1.id,"Math");
+  state = addCourse_submissions(state,course1.id,submission1.id);
+  state = addCourse_submissions(state,course1.id,submission2.id);
+  state = addCourse_submissions(state,course1.id,submission3.id);
+  state = setCourse_name(state,course2.id,"History");
+  state = addCourse_submissions(state,course2.id,submission4.id);
+  state = addCourse_submissions(state,course2.id,submission5.id);
+  state = setSubmission_student(state,submission1.id,alice.id);
+  state = setSubmission_student(state,submission2.id,bob.id);
+  state = setSubmission_student(state,submission3.id,charlie.id);
+  state = setSubmission_student(state,submission4.id,alice.id);
+  state = setSubmission_student(state,submission5.id,charlie.id);
   return {
     state : state,
     ids : {
       alice : alice.id,
       app : app.id,
       bob : bob.id,
-      c1 : c1.id,
-      c2 : c2.id,
       charlie : charlie.id,
-      noname1 : noname1.id,
-      noname2 : noname2.id,
-      noname3 : noname3.id,
-      noname4 : noname4.id,
-      noname5 : noname5.id
+      course1 : course1.id,
+      course2 : course2.id,
+      submission1 : submission1.id,
+      submission2 : submission2.id,
+      submission3 : submission3.id,
+      submission4 : submission4.id,
+      submission5 : submission5.id
     }
   };
 }

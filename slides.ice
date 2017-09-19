@@ -13,6 +13,15 @@ imports
   ./examples/main{
     component TodoExample()
     component TodoWithData()
+    component Todo2()
+    component Todo3()
+    component Todo4()
+    component Todo5()
+    component Todo6()
+    component Todo7()
+    component Todo8()
+    component Todo9()
+    component Todo10()
     component TodoExampleDup()
     component CounterExample()
     component TaskListExample()
@@ -88,8 +97,10 @@ view
       intro: Slide {
         slideshow = slideshow
         title = "PixieDust: Declarative incremental user interfaces for IceDust"
-        content = div {
-          
+        content = @Center {
+          @FixedWidth(800) {
+            @TodoWithData()
+          }
         }
       }      
       slideshow { current = intro }
@@ -99,8 +110,8 @@ view
         previous = intro
         title = "UI Pattern"
         content = @TwoColumn(
-          no value
-        , @FixedWidthImage("/images/ui.svg", 600)
+          @FixedWidthImage("/images/ui.svg", 600)
+        , no value
         )
       }
       
@@ -109,8 +120,8 @@ view
         previous = ui
         title = "UI Pattern"
         content = @TwoColumn(
-          no value
-        , @FixedWidthImage("/images/ui-extended.svg", 600)
+          @FixedWidthImage("/images/ui-extended.svg", 600)
+        , no value
         )
       }
       
@@ -118,8 +129,9 @@ view
         slideshow = slideshow
         previous = uiExtended
         title = "UI Pattern"
-        content = @TwoColumn(
-          @List {
+        content = @TwoColumn( 
+          @FixedWidthImage("/images/ui-extended.svg", 600)
+        , @List {
             li { "Incremental Rendering" }
             li { "Composable views" }
             li { "User input handling" }
@@ -127,7 +139,6 @@ view
             li { "Bidirectional mapping between data and view" }
             li { "Undo/redo (time travelling)" }
           }
-        , @FixedWidthImage("/images/ui-extended.svg", 600)
         )
       }
       
@@ -135,7 +146,11 @@ view
         slideshow = slideshow
         previous = uiExtended2
         title = "Todo"
-        content = @TodoExample()
+        content = @Center {
+          @FixedWidth(800){
+            @TodoExample()
+          }
+        }
       }
       
       
@@ -152,130 +167,110 @@ view
         )
       }
       
+
+      
       todo1 : Slide {
         slideshow = slideshow
         previous = todoRedux
-        title = "Todo"
+        title = "Todo.pix"
         content = @WideTwoColumn(
           @CodeBlockFetch("pix", "sources/todo/todo1.pix")
-        , @TodoExample()
+        , no value
         )
       }
-      
       todo2 : Slide {
         slideshow = slideshow
         previous = todo1
-        title = "Todo"
+        title = "Todo.pix"
         content = @WideTwoColumn(
           @CodeBlockFetch("pix", "sources/todo/todo2.pix")
-        , @TodoExample()
+        , @Todo2()
         )
       }
       
       todo3 : Slide {
         slideshow = slideshow
         previous = todo2
-        title = "Todo"
+        title = "Todo.pix"
         content = @WideTwoColumn(
           @CodeBlockFetch("pix", "sources/todo/todo3.pix")
-        , @TodoExample()
+        , @Todo3()
         )
       }
       
       todo4 : Slide {
         slideshow = slideshow
         previous = todo3
-        title = "Todo"
+        title = "Todo.pix"
         content = @WideTwoColumn(
           @CodeBlockFetch("pix", "sources/todo/todo4.pix")
-        , @TodoExample()
+        , @Todo4()
         )
       }
       
       todo5 : Slide {
         slideshow = slideshow
         previous = todo4
-        title = "Todo"
+        title = "Todo.pix"
         content = @WideTwoColumn(
           @CodeBlockFetch("pix", "sources/todo/todo5.pix")
-        , @TodoExample()
+        , @Todo5()
         )
       }
       
       todo6 : Slide {
         slideshow = slideshow
         previous = todo5
-        title = "Todo"
+        title = "Todo.pix"
         content = @WideTwoColumn(
           @CodeBlockFetch("pix", "sources/todo/todo6.pix")
-        , @TodoExample()
+        , @Todo6()
         )
       }
       
       todo7 : Slide {
         slideshow = slideshow
         previous = todo6
-        title = "Todo"
+        title = "Todo.pix"
         content = @WideTwoColumn(
           @CodeBlockFetch("pix", "sources/todo/todo7.pix")
-        , @TodoExample()
+        , @Todo7()
         )
       }
       
       todo8 : Slide {
         slideshow = slideshow
         previous = todo7
-        title = "Todo"
+        title = "Todo.pix"
         content = @WideTwoColumn(
           @CodeBlockFetch("pix", "sources/todo/todo8.pix")
-        , @TodoExample()
+        , @Todo8()
         )
       }
       
       todo9 : Slide {
         slideshow = slideshow
         previous = todo8
-        title = "Todo"
+        title = "Todo.pix"
         content = @WideTwoColumn(
           @CodeBlockFetch("pix", "sources/todo/todo9.pix")
-        , @TodoExample()
+        , @Todo9()
         )
       }
       
       todo10 : Slide {
         slideshow = slideshow
         previous = todo9
-        title = "Todo"
+        title = "Todo.pix"
         content = @WideTwoColumn(
           @CodeBlockFetch("pix", "sources/todo/todo10.pix")
-        , @TodoExample()
+        , @Todo10()
         )
       }
-      
-      todo11 : Slide {
-        slideshow = slideshow
-        previous = todo10
-        title = "Todo"
-        content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo11.pix")
-        , @TodoExample()
-        )
-      }
-      
-      todo12 : Slide {
-        slideshow = slideshow
-        previous = todo11
-        title = "Todo"
-        content = @WideTwoColumn(
-          @CodeBlockFetch("pix", "sources/todo/todo12.pix")
-        , @TodoExample()
-        )
-      }
-      
       
       immutable1: Slide {
         slideshow = slideshow
-        previous = todo9
+        previous = todo10
         title = "Model"
         content = @TwoColumn(
           @CodeBlockFetch("pix", "sources/runtime/entitymapping.pix")
@@ -308,6 +303,8 @@ view
         , @CodeBlockFetch("js", "sources/runtime/entitymapping.js")
         )
       }
+      
+      slideshow { current = immutable1 }
       
       getter: Slide {
         slideshow = slideshow
@@ -393,7 +390,7 @@ view
         previous = reducer3
         title = "Store"
         content = @TwoColumn(
-          @FixedWidthImage("images/reducer3.svg", 600)
+          @FixedWidthImage("images/store1.svg", 600)
         , @CodeBlockFetch("ts", "sources/runtime/store.ts")
         )
       }
@@ -402,40 +399,25 @@ view
         slideshow = slideshow
         previous = store1
         title = "Store"
-        content = @Center { @FixedWidthImage("images/store0.svg", 800) }
+        content = @TwoColumn(
+          @FixedWidthImage("images/store2.svg", 600)
+        , @CodeBlockFetch("ts", "sources/runtime/store.ts")
+        )
       }
       
       store3: Slide {
         slideshow = slideshow
         previous = store2
         title = "Store"
-        content = @Center { @FixedWidthImage("images/store1.svg", 800) }
-      }
-      
-      store4: Slide {
-        slideshow = slideshow
-        previous = store3
-        title = "Store"
-        content = @Center { @FixedWidthImage("images/store2.svg", 800) }
-      }
-      
-      store5: Slide {
-        slideshow = slideshow
-        previous = store4
-        title = "Store"
-        content = @Center { @FixedWidthImage("images/store3.svg", 800) }
-      }
-      
-      store6: Slide {
-        slideshow = slideshow
-        previous = store5
-        title = "Store"
-        content = @Center { @FixedWidthImage("images/store4.svg", 800) }
+        content = @TwoColumn(
+          @FixedWidthImage("images/store3.svg", 600)
+        , @CodeBlockFetch("ts", "sources/runtime/store.ts")
+        )
       }
       
       actions: Slide{
         slideshow = slideshow
-        previous = store6
+        previous = store3
         title = "Action types in PixieDust"
         content = 
           @TwoColumn( 
@@ -470,30 +452,19 @@ view
           )
       }
       
-      
-      incometax1: Slide{
+      lazy: Slide{
         slideshow = slideshow
         previous = actions2
         title = "Lazy rendering"
         content = @TwoColumn(
-          @CodeBlockFetchSmall("pix", "sources/incometax.pix")
-        , @IncomeTaxExample()
-        )
-      }
-      
-      incometax2: Slide{
-        slideshow = slideshow
-        previous = incometax1
-        title = "Lazy rendering"
-        content = @TwoColumn(
-          @CodeBlockFetchSmall("pix", "sources/incometax.pix")
-        , @IncomeTaxNoSummaryExample()
+          @CodeBlockFetch("pix", "sources/grades.pix")
+        , @GradesExample()
         )
       }
       
       component1 : Slide {
         slideshow = slideshow
-        previous = incometax2
+        previous = lazy
         title = "Component"
         content = @TwoColumn(
           div {
@@ -548,7 +519,11 @@ view
         slideshow = slideshow
         previous = component4
         title = "PixieDust"
-        content = @TodoWithData()
+        content = @Center{
+          @FixedWidth(800){
+            @TodoWithData()
+          }
+        }
       }
       
       slideshow1 : Slide {
@@ -589,9 +564,16 @@ view
         )
       }
       
-      grades: Slide {
+      slidesExamples: Slide {
         slideshow = slideshow
         previous = slides
+        title = "Slides"
+        content = @CodeBlockFetch("pix", "sources/slideshow/slideshow_examples.pix")
+      }
+      
+      grades: Slide {
+        slideshow = slideshow
+        previous = slidesExamples
         title = "Grades"
         content = @TwoColumn(
           @CodeBlockFetchSmall("pix", "examples/grades/grades.ice")
@@ -746,12 +728,18 @@ view
     }
   }
   
+  component FixedWidth(width: Int) {
+    div[style={width=width}] {
+      children
+    }
+  }
+  
   
   component Center(){
     div[style={
       display="flex"
-    , width="100%"
-    , height="100%"
+    , maxWidth="90%"
+    , maxHeight="90%"
     , justifyContent="space-around"
     }]{
       div[style={minWidth="0"}] {

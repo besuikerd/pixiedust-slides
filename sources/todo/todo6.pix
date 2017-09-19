@@ -1,13 +1,21 @@
-relation TodoList.finishedTodos =
-  todos.filter(todo.finished) <-> Todo
+entity TodoList {
+  input  : String
+  filter : String
+}
 
-relation TodoList.visibleTodos =
-  switch {
-    case filter == "All" => todos
-    case filter == "Completed" => finishedTodos
-    case filter == "Not Completed" =>
-      todos \ finishedTodos
-  } <-> Todo
+component FilterType(name: String, list: TodoList) {
+  li {
+    a[onClick=setFilter()] { name }
+  }
+  action setFilter(){
+    list { filter = name }
+  }
+}
 
-
-for(todo in list.visibleTodos) @TodoItem(todo)
+component TodoFilters(list: TodoList) {
+  ul{
+    @FilterType("All", list)
+    @FilterType("Completed", list)
+    @FilterType("Not Completed", list)
+  }
+}

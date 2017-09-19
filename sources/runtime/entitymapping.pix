@@ -1,8 +1,8 @@
-entity Foo {
-  attr  : Int
-  dv    : Int = 42 (default)
-  der   : Int = attr + 1
+entity Todo {
+  task     : String
+  finished : Boolean = false (default)
+  pretty   : String = task + "!"
 }
-entity Bar {}
+entity TodoList {}
 
-relation Foo.bar 1 <-> * Bar.foos
+relation Todo.list 1 <-> * TodoList.todos

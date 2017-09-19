@@ -1,10 +1,7 @@
-todosLeft  : Int    = (todos \ finishedTodos).count()
-itemPlural : String =
-  if(todosLeft == 1)
-    "item"
-  else
-    "items"
+allFinished : Boolean = conj(todos.finished)
 
-span {
-  "${list.todosLeft} ${list.itemPlural} left"
+action toggleAll(){
+  list.todos {
+    finished = !app.allFinished
+  }
 }

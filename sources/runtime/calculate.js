@@ -1,5 +1,5 @@
-function calculateFoo_der(state, id){
-  var value = getFoo_der(state, id);
+function calculateTodo_pretty(state, id){
+  var value = getTodo_pretty(state, id);
   if(value === undefined){
     //calculate value
   }

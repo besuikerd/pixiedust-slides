@@ -77,24 +77,24 @@ data
   charlie: Student { name = "Charlie" }
   
   
-  c1: Course {
+  course1: Course {
     name = "Math"
     submissions =
-      { student = alice }
-    , { student = bob }
-    , { student = charlie }
+      submission1 { student = alice }
+    , submission2 { student = bob }
+    , submission3 { student = charlie }
   }
   
-  c2 : Course {
+  course2 : Course {
     name = "History"
     submissions = 
-      { student = alice }
-    , { student = charlie } 
+      submission4 { student = alice }
+    , submission5 { student = charlie } 
   }
   
   app : App {
-    courses = c1, c2
-    selectedCourse = c1
+    courses = course1, course2
+    selectedCourse = course1
   }
 execute
   @App(app)

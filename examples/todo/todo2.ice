@@ -21,7 +21,7 @@ model
   
   entity Todo {
     task: String
-    finished: Boolean = false (default)
+    finished: Boolean
   }
   
   relation TodoApp.editing ? <-> ? Todo.editing_inverse
@@ -147,7 +147,6 @@ view
       div[className="view"] {
         @BooleanInput(todo.finished, "toggle", toggleFinished)
         label[onDoubleClick=editTodo()] { todo.task }
-        button[className="destroy", onClick=removeTodo()]
       }
       @AutoFocusStringInput(todo.task, "edit", todo.app.editing == todo, finishEditing)
     }
@@ -166,4 +165,7 @@ data
   }
   
 execute
-  @TodoApp(app)
+  div[className="todo-list"]{
+    for(todo in app.todos.first()) (@TodoApp(app))
+  }
+  

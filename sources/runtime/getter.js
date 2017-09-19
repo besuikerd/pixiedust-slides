@@ -1,3 +1,3 @@
-function getFoo_attr(state, id) {
-  return state.get(id).attr;
+function getTodo_task(state, id) {
+  return state.Todo.get(id).task;
 }

@@ -32,7 +32,7 @@ module.exports =
   function pix (hljs) {
     return {
       case_insensitive: false, // language is case-insensitive
-      keywords: 'entity model view action for in relation switch case default if else imports ref data config module',
+      keywords: 'entity model view action for in relation switch case default if else imports ref data config module execute ref',
       contains: [
         {
           className: 'string'

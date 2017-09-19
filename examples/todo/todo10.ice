@@ -14,14 +14,14 @@ model
   
   entity TodoApp{
     filter: String = "All" (default)
-    allFinished: Boolean = conj(todos.finished)
+    allFinished: Boolean = todosLeft == 0
     todosLeft: Int = (todos \ finishedTodos).count()
     input: String = "" (default)
   }
   
   entity Todo {
     task: String
-    finished: Boolean = false (default)
+    finished: Boolean
   }
   
   relation TodoApp.editing ? <-> ? Todo.editing_inverse
@@ -153,6 +153,9 @@ view
     }
   }
   
+  component Part(app: TodoApp){
+    @TodoApp(app)
+  }
   
 data
   app : TodoApp{
@@ -166,4 +169,5 @@ data
   }
   
 execute
-  @TodoApp(app)
+  @Part(app)
+  

@@ -1,20 +1,21 @@
-Foo:
-      foo1 => {id: foo1, attr: 12}
-      foo2 => {id: foo2, attr: 16, dv: 20}
+Todo:
+  todo1 => {id: todo1, task: "t1"}
+  todo2 => {id: todo2, task: "t2",
+                finished: true}
 
-Foo.dv:
-      foo1 => 42
+Todo.finished:
+  todo1 => false
 
-Foo.der:
-      foo1 => 13
-      foo2 => 17
+Todo.pretty:
+  todo1 => "t1!"
+  todo2 => "t2!"
 
-Bar:
-      bar1 => {id: bar1}
+TodoList:
+  list1 => {id: list1}
 
-Foo.bar:
-      foo1 => bar1
-      foo2 => bar1
+Todo.list:
+  foo1 => list1
+  foo2 => list1
 
-Bar.foos:
-      bar1 => [foo1, foo2]
+TodoList.todos:
+  bar1 => [todo1, todo2]

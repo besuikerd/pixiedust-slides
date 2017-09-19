@@ -2,10 +2,5 @@ component TodoItem(todo: Todo){
   li {
     @BooleanInput(todo.finished)
     @FocusStringInput(todo.task)
-    button[onClick=deleteTodo()]
-  }
-
-  action removeTodo(){
-    todo.list { todos = todos \ todo }
   }
 }

@@ -21,7 +21,7 @@ model
   
   entity Todo {
     task: String
-    finished: Boolean = false (default)
+    finished: Boolean
   }
   
   relation TodoApp.editing ? <-> ? Todo.editing_inverse
@@ -153,6 +153,11 @@ view
     }
   }
   
+  component Part(app: TodoApp){
+    div[className="todo-list"]{
+      for(todo in app.todos.first()) (@TodoItem(todo))
+    }
+  }
   
 data
   app : TodoApp{
@@ -166,4 +171,5 @@ data
   }
   
 execute
-  @TodoApp(app)
+  @Part(app)
+  

@@ -1,6 +1,6 @@
 function lift(component){
   return class extends ReactComponent{
-    var materialized: ReactComponent;
+    var materialized: ReactElement;
 
     componentWillReceiveProps(props){
       this.materialize(props);

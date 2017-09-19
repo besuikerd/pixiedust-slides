@@ -21,7 +21,7 @@ model
   
   entity Todo {
     task: String
-    finished: Boolean = false (default)
+    finished: Boolean
   }
   
   relation TodoApp.editing ? <-> ? Todo.editing_inverse
@@ -62,12 +62,10 @@ view
       
       if(app.todos.count() > 0)
         section[className="main"] {
-          @BooleanInput(app.allFinished, "toggle-all", toggleAll)
           ul[className="todo-list"] {
             for(todo in app.visibleTodos) (@TodoItem(todo))
           }
         }
-      @TodoFooter(app)
     }
   }
   
@@ -153,6 +151,9 @@ view
     }
   }
   
+  component Part(app: TodoApp){
+    @TodoApp(app)
+  }
   
 data
   app : TodoApp{
@@ -166,4 +167,5 @@ data
   }
   
 execute
-  @TodoApp(app)
+  @Part(app)
+  
