@@ -12,7 +12,7 @@ imports
   
   ./examples/main{
     component TodoExample()
-    component TodoDocked()
+    component TodoWithData()
     component TodoExampleDup()
     component CounterExample()
     component TaskListExample()
@@ -20,6 +20,7 @@ imports
     component IncomeTaxNoSummaryExample()
     component AddExample()
     component SlidesExample()
+    component GradesExample()
   }
   
   ./components/CodeBlock as CodeBlock {
@@ -271,14 +272,130 @@ view
         )
       }
       
-      store1: Slide {
+      
+      immutable1: Slide {
         slideshow = slideshow
         previous = todo9
-        title = "Store"
-        content = div{
-          @CodeBlock("haskell", "type Reducer state action = (state, action) -> state")
-          @CodeBlockFetch("javascript", "sources/store.js")
+        title = "Model"
+        content = @TwoColumn(
+          @CodeBlockFetch("pix", "sources/runtime/entitymapping.pix")
+        , no value
+        )
+      }
+      
+      immutable2: Slide {
+        slideshow = slideshow
+        previous = immutable1
+        title = "Model"
+        content = @TwoColumn(
+          div {
+            @CodeBlockFetch("pix", "sources/runtime/entitymapping.pix")
+            @FixedWidthImage("images/foo.svg", 700)
+          }
+        , no value
+        )
+      }
+      
+      immutable3: Slide {
+        slideshow = slideshow
+        previous = immutable2
+        title = "Model"
+        content = @TwoColumn(
+          div {
+            @CodeBlockFetch("pix", "sources/runtime/entitymapping.pix")
+            @FixedWidthImage("images/foo.svg", 700)
+          }
+        , @CodeBlockFetch("js", "sources/runtime/entitymapping.js")
+        )
+      }
+      
+      getter: Slide {
+        slideshow = slideshow
+        previous = immutable3
+        title = "Getter"
+        content = @TwoColumn(
+          div {
+            @CodeBlockFetch("pix", "sources/runtime/entitymapping.pix")
+            @FixedWidthImage("images/foo.svg", 700)
+          }
+        , @CodeBlockFetch("js", "sources/runtime/getter.js")
+        )
+      }
+      
+      calculate: Slide {
+        slideshow = slideshow
+        previous = getter
+        title = "Calculate"
+        content = @TwoColumn(
+          div {
+            @CodeBlockFetch("pix", "sources/runtime/entitymapping.pix")
+            @FixedWidthImage("images/foo.svg", 700)
+          }
+        , @CodeBlockFetch("js", "sources/runtime/calculate.js")
+        )
+      }
+      
+      setter: Slide {
+        slideshow = slideshow
+        previous = calculate
+        title = "Setter"
+        content = @TwoColumn(
+          div {
+            @CodeBlockFetch("pix", "sources/runtime/entitymapping.pix")
+            @FixedWidthImage("images/foo.svg", 700)
+          }
+        , @CodeBlockFetch("js", "sources/runtime/setter.js")
+        )
+      }
+      
+      invalidate: Slide {
+        slideshow = slideshow
+        previous = setter
+        title = "Invalidate"
+        content = @TwoColumn(
+          div {
+            @CodeBlockFetch("pix", "sources/runtime/entitymapping.pix")
+            @FixedWidthImage("images/foo.svg", 700)
+          }
+        , @CodeBlockFetch("js", "sources/runtime/invalidate.js")
+        )
+      }
+      
+      reducer1 : Slide {
+        slideshow = slideshow
+        previous = invalidate
+        title = "Actions"
+        content = @Center{
+          @FixedWidthImage("images/reducer1.svg", 600)
         }
+      }
+      
+      reducer2 : Slide {
+        slideshow = slideshow
+        previous = reducer1
+        title = "Actions"
+        content = @Center{
+          @FixedWidthImage("images/reducer2.svg", 600)
+        }
+      }
+      
+      reducer3 : Slide {
+        slideshow = slideshow
+        previous = reducer2
+        title = "Actions"
+        content = @Center{
+          @FixedWidthImage("images/reducer3.svg", 600)
+        }
+      }
+      
+      store1 : Slide {
+        slideshow = slideshow
+        previous = reducer3
+        title = "Store"
+        content = @TwoColumn(
+          @FixedWidthImage("images/reducer3.svg", 600)
+        , @CodeBlockFetch("ts", "sources/runtime/store.ts")
+        )
       }
       
       store2: Slide {
@@ -322,9 +439,8 @@ view
         title = "Action types in PixieDust"
         content = 
           @TwoColumn( 
-            @CodeBlockFetch("pix", "/sources/add.pix")
+            @CodeBlockFetch("pix", "sources/add.pix")
           , div{
-              
               @AddExample()
             }
           )
@@ -336,7 +452,7 @@ view
         title = "Action types in PixieDust"
         content = 
           @TwoColumn( 
-            @CodeBlockFetch("pix", "/sources/add.pix")
+            @CodeBlockFetch("pix", "sources/add.pix")
           , div{
               @AddExample()
               
@@ -360,7 +476,7 @@ view
         previous = actions2
         title = "Lazy rendering"
         content = @TwoColumn(
-          @CodeBlockFetchSmall("pix", "/sources/incometax.pix")
+          @CodeBlockFetchSmall("pix", "sources/incometax.pix")
         , @IncomeTaxExample()
         )
       }
@@ -370,49 +486,125 @@ view
         previous = incometax1
         title = "Lazy rendering"
         content = @TwoColumn(
-          @CodeBlockFetchSmall("pix", "/sources/incometax.pix")
+          @CodeBlockFetchSmall("pix", "sources/incometax.pix")
         , @IncomeTaxNoSummaryExample()
         )
       }
       
-//      vdom: Slide {
-//        slideshow = slideshow
-//        previous = actions2
-//        title = "Virtual DOM"
-//        content = @FixedWidthImage("images/vdom.svg", 1600)
-//      }
+      component1 : Slide {
+        slideshow = slideshow
+        previous = incometax2
+        title = "Component"
+        content = @TwoColumn(
+          div {
+            @CodeBlockFetch("ts", "sources/runtime/component.ts")
+          }
+        , no value
+        )
+      }
       
+      component2 : Slide {
+        slideshow = slideshow
+        previous = component1
+        title = "Component"
+        content = @TwoColumn(
+          div {
+            @CodeBlockFetch("ts", "sources/runtime/component.ts")
+            @CodeBlockFetch("pix", "sources/runtime/component.pix")
+          }
+        , no value
+        )
+      }
       
+      component3 : Slide {
+        slideshow = slideshow
+        previous = component2
+        title = "Component"
+        content = @TwoColumn(
+          div {
+            @CodeBlockFetch("ts", "sources/runtime/component.ts")
+            @CodeBlockFetch("pix", "sources/runtime/component.pix")
+            @CodeBlockFetch("ts", "sources/runtime/ReactComponent.ts")
+          }
+        , no value
+        )
+      }
       
+      component4 : Slide {
+        slideshow = slideshow
+        previous = component3
+        title = "Component"
+        content = @TwoColumn(
+          div {
+            @CodeBlockFetch("ts", "sources/runtime/component.ts")
+            @CodeBlockFetch("pix", "sources/runtime/component.pix")
+            @CodeBlockFetch("ts", "sources/runtime/ReactComponent.ts")
+          }
+        , @CodeBlockFetch("ts", "sources/runtime/Lifted.ts")
+        )
+      }
       
-//      dataEncapsulation: Slide {
-//        slideshow = slideshow
-//        previous = scopegraphVisualizer4
-//        title = "Encapsulation of data"
-//        content = div [className="pure-g"]{
-//          div[className="pure-u-2-3"] {
-//            @TwoColumn(
-//              @TodoExample()
-//            , @TodoExample()
-//            )
-//          }
-//          
-//          div[className="pure-u-1-3"] {
-//            @TodoExampleDup()
-//          }
-//        }
-//      }
+      conclusion: Slide {
+        slideshow = slideshow
+        previous = component4
+        title = "PixieDust"
+        content = @TodoWithData()
+      }
       
+      slideshow1 : Slide {
+        slideshow = slideshow
+        previous = conclusion
+        title = "Slideshow"
+        content = @CodeBlockFetch("pix", "sources/slideshow/slideshow_model.pix")
+      }
       
-//      slides: Slide {
-//        slideshow = slideshow
-//        previous = intro
-//        title = "Slides"
-//        content = @TwoColumn(
-//          @SlidesExample()
-//        , @SlidesExample()
-//        )
-//      }
+      slideshow2 : Slide {
+        slideshow = slideshow
+        previous = slideshow1
+        title = "Slideshow"
+        content = @CodeBlockFetch("pix", "sources/slideshow/slideshow_model2.pix")
+      }
+      
+      slideshow3 : Slide {
+        slideshow = slideshow
+        previous = slideshow2
+        title = "Slideshow"
+        content = @CodeBlockFetch("pix", "sources/slideshow/slideshow_slide.pix")
+      }
+      
+      slideshow4 : Slide {
+        slideshow = slideshow
+        previous = slideshow3
+        title = "Slideshow"
+        content = @CodeBlockFetch("pix", "sources/slideshow/slideshow_footer.pix")
+      }
+      
+      slides: Slide {
+        slideshow = slideshow
+        previous = slideshow4
+        title = "Slides"
+        content = @TwoColumn(
+          @SlidesExample()
+        , @SlidesExample()
+        )
+      }
+      
+      grades: Slide {
+        slideshow = slideshow
+        previous = slides
+        title = "Grades"
+        content = @TwoColumn(
+          @CodeBlockFetchSmall("pix", "examples/grades/grades.ice")
+        , @GradesExample()
+        )
+      }
+      
+      vdom: Slide {
+        slideshow = slideshow
+        previous = grades
+        title = "Virtual DOM"
+        content = @FixedWidthImage("images/vdom.svg", 1600)
+      }
       
     }
     @Trigger(init)
@@ -466,7 +658,6 @@ view
       }
       @SlideFooter(slide)
     }
-
   }
   
   component SlideHeader(slide: Slide) {

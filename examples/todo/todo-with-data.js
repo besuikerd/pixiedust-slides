@@ -1132,11 +1132,17 @@ function init(state) {
   state = addTodoApp_todos(state,app.id,t4.id);
   state = addTodoApp_todos(state,app.id,t5.id);
   state = addTodoApp_todos(state,app.id,t6.id);
+  state = setTodo_finished(state,t1.id,true);
   state = setTodo_task(state,t1.id,"Incremental Rendering");
+  state = setTodo_finished(state,t2.id,true);
   state = setTodo_task(state,t2.id,"Composable views");
+  state = setTodo_finished(state,t3.id,true);
   state = setTodo_task(state,t3.id,"User input handling");
+  state = setTodo_finished(state,t4.id,true);
   state = setTodo_task(state,t4.id,"(Incremental) derived values");
+  state = setTodo_finished(state,t5.id,true);
   state = setTodo_task(state,t5.id,"Bidirectional mapping between data and view");
+  state = setTodo_finished(state,t6.id,true);
   state = setTodo_task(state,t6.id,"Undo/redo (time travelling)");
   return {
     state : state,
@@ -1473,30 +1479,7 @@ module.exports.reducer = reducer;
 var Component =  ( function () {
         var oldScope = scope;
         return {
-          TodoFilters : Lifted(function TodoFilters(props,state,store) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _2 = React.createElement(Component.FilterType,{
-                    name : "All",
-                    app : scope.app
-                  });
-                  var _3 = React.createElement(Component.FilterType,{
-                    name : "Completed",
-                    app : scope.app
-                  });
-                  var _4 = React.createElement(Component.FilterType,{
-                    name : "Not Completed",
-                    app : scope.app
-                  });
-                  var _0 = React.createElement("ul",{
-                    className : "filters"
-                  },_2,_3,_4);
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          TodoApp : Lifted(function TodoApp(props,state,store) {
+          TodoApp : Lifted(function TodoApp(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _4 = React.createElement("h1",{
@@ -1602,7 +1585,30 @@ var Component =  ( function () {
                     state : state
                   };
               },["toggleAll","createTodo"]),
-          FilterType : Lifted(function FilterType(props,state,store) {
+          TodoFilters : Lifted(function TodoFilters(props,state) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 = React.createElement(Component.FilterType,{
+                    name : "All",
+                    app : scope.app
+                  });
+                  var _3 = React.createElement(Component.FilterType,{
+                    name : "Completed",
+                    app : scope.app
+                  });
+                  var _4 = React.createElement(Component.FilterType,{
+                    name : "Not Completed",
+                    app : scope.app
+                  });
+                  var _0 = React.createElement("ul",{
+                    className : "filters"
+                  },_2,_3,_4);
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          FilterType : Lifted(function FilterType(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _6 ;
@@ -1631,7 +1637,7 @@ var Component =  ( function () {
                     state : state
                   };
               },["setFilter"]),
-          BooleanInput : Lifted(function BooleanInput(props,state,store) {
+          BooleanInput : Lifted(function BooleanInput(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _0 = React.createElement("input",{
@@ -1645,7 +1651,7 @@ var Component =  ( function () {
                     state : state
                   };
               },[]),
-          TodoFooter : Lifted(function TodoFooter(props,state,store) {
+          TodoFooter : Lifted(function TodoFooter(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _4 ;
@@ -1711,7 +1717,7 @@ var Component =  ( function () {
                     state : state
                   };
               },["clearCompleted"]),
-          TodoItem : Lifted(function TodoItem(props,state,store) {
+          TodoItem : Lifted(function TodoItem(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _0 = getTodo_app(state,scope.todo);

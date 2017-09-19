@@ -1,4 +1,6 @@
-entity Num{ value : Int = 0 (default) }
+entity Num{
+  value : Int = 0 (default)
+}
 entity Add{
   value : Int = lhs.value + rhs.value
 }
@@ -6,14 +8,15 @@ relation Add.lhs 1 <-> Num
 relation Add.rhs 1 <-> Num
 
 component Add(add: Add) {
+  button[onClick=reset()]{ "Reset" }
+  @IntInput(add.lhs.value) "+"
+  @IntInput(add.rhs.value) "="
+  add.value
+
   action reset(){
     add {
       lhs { value = 0 }
       rhs { value = 0 }
     }
   }
-  button[onClick=reset()]{ "Reset" }
-  @IntInput(add.lhs.value) "+"
-  @IntInput(add.rhs.value) "="
-  add.value
 }

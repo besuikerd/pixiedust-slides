@@ -1,0 +1,5 @@
+component FooComponent(foo: Foo) {
+  foo.attr
+  foo.der
+  foo.dv
+}

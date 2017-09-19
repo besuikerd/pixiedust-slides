@@ -1,0 +1,5 @@
+component Slide(slide: Slide) {
+  h1 { slide.title }
+  slide.content
+  @SlideFooter(slide)
+}

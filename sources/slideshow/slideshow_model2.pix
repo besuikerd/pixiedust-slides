@@ -1,0 +1,20 @@
+entity SlideShow{
+  totalSlides: Int = current.slideNumber + current.slidesLeft <+ 0
+}
+
+entity Slide {
+  title: String
+  content: View?
+
+  slideNumber : Int = previous.slideNumber + 1 <+ 1
+  slidesLeft: Int = 1 + next.slidesLeft <+ 0
+}
+
+relation Slide.slideshow 1 <-> * SlideShow.slides
+relation SlideShow.current ? <-> ? Slide.inverseCurrent
+
+relation Slide.allNext0 = this ++ next.allNext0 <+ this <-> Slide.inverseAllNext0
+relation Slide.allPrevious0 = previous.allPrevious0 ++ this <+ this <-> Slide.inverseAllPrevious0
+
+relation Slide.allPrevious = allPrevious0 \ this <-> Slide.inverseAllPrevious
+relation Slide.allNext =  allNext0 \ this <-> Slide.inverseAllNext

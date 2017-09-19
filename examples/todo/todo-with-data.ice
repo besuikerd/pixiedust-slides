@@ -157,12 +157,12 @@ view
 data
   app : TodoApp{
     todos =
-      t1 { task = "Incremental Rendering" },
-      t2 { task = "Composable views" },
-      t3 { task = "User input handling" },
-      t4 { task = "(Incremental) derived values" },
-      t5 { task = "Bidirectional mapping between data and view" },
-      t6 { task = "Undo/redo (time travelling)" }
+      t1 { task = "Incremental Rendering" finished = true },
+      t2 { task = "Composable views" finished = true },
+      t3 { task = "User input handling" finished = true },
+      t4 { task = "(Incremental) derived values" finished = true },
+      t5 { task = "Bidirectional mapping between data and view" finished = true },
+      t6 { task = "Undo/redo (time travelling)" finished = true }
   }
   
 execute

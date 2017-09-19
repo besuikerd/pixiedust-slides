@@ -1,0 +1,8 @@
+entity Foo {
+  attr  : Int
+  dv    : Int = 42 (default)
+  der   : Int = attr + 1
+}
+entity Bar {}
+
+relation Foo.bar 1 <-> * Bar.foos

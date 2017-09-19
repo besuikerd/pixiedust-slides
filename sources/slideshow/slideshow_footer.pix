@@ -1,0 +1,23 @@
+Component Footer(slide: Slide) {
+  action setCurrent(slide: Slide?) { slide.slideshow { current = slide }}
+  action nextSlide(){ slide.slideshow { current = current.next }}
+  action previousSlide(){ slide.slideshow { current = current.previous }}
+
+  @KeyboardListener(
+    slide.nextSlide
+  , slide.previousSlide
+  )
+
+  footer {
+    span { slide.slideNumber "/" slide.slideshow.totalSlides }
+    div {
+      button[onClick=previousSlide()] { "<" }
+      for(s in slide.allPrevious)
+        button[onClick=setCurrent(s) { s.slideNumber }
+      span { slide.slideNumber }
+      for(slide in slide.allNext)
+        button[onClick=setCurrent(s){ s.slideNumber}
+      button[onClick=nextSlide()] { ">" }
+    }
+  }
+}
