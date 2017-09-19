@@ -2707,6 +2707,122 @@ module.exports.reducer = reducer;
 var Component =  ( function () {
         var oldScope = scope;
         return {
+          ThreeColumn : Lifted(function ThreeColumn(props,state) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 = React.createElement("div",{
+                    className : "pure-u-1-3"
+                  },scope.left);
+                  var _4 = React.createElement("div",{
+                    className : "pure-u-1-3"
+                  },scope.middle);
+                  var _6 = React.createElement("div",{
+                    className : "pure-u-1-3"
+                  },scope.right);
+                  var _0 = React.createElement("div",{
+                    className : "pure-g"
+                  },_2,_4,_6);
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          Slide : Lifted(function Slide(props,state) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 = React.createElement(Component.SlideHeader,{
+                    slide : scope.slide
+                  });
+                  var _5 = React.createElement(Component.VSpace,{
+                  });
+                  var _6 = getSlide_content(state,scope.slide);
+                  var _3 = React.createElement("div",{
+                    className : "slide-content"
+                  },_5,_6);
+                  var _7 = React.createElement(Component.SlideFooter,{
+                    slide : scope.slide
+                  });
+                  var _0 = React.createElement("div",{
+                    className : "slide"
+                  },_2,_3,_7);
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          VSpace : Lifted(function VSpace(props,state) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _0 = React.createElement("br",{
+                    style : {
+                      height : "50x=px"
+                    }
+                  });
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          FixedWidthImage : Lifted(function FixedWidthImage(props,state) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _3 =  ( scope.width == null ? constants.EMPTY_ARRAY : [scope.width] ) .concat("px" == null ? constants.EMPTY_ARRAY : ["px"]);
+                  var _4 = _3.join('');
+                  var _5 = _4 !== null ? "" + _4 : null;
+                  var _0 = React.createElement("img",{
+                    src : scope.src,
+                    style : {
+                      width : _5
+                    }
+                  });
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          TwoColumn : Lifted(function TwoColumn(props,state) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 = React.createElement("div",{
+                    className : "pure-u-1-2"
+                  },scope.left);
+                  var _4 = React.createElement("div",{
+                    className : "pure-u-1-2"
+                  },scope.right);
+                  var _0 = React.createElement("div",{
+                    className : "pure-g"
+                  },_2,_4);
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          CodeBlockFetch : Lifted(function CodeBlockFetch(props,state) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _0 = React.createElement(imports["CodeBlock"].CodeBlockFetch,{
+                    language : scope.language,
+                    url : scope.url,
+                    className : "font-normal"
+                  });
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          CodeBlockFetchSmall : Lifted(function CodeBlockFetchSmall(props,state) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _0 = React.createElement(imports["CodeBlock"].CodeBlockFetch,{
+                    language : scope.language,
+                    url : scope.url,
+                    className : "font-small"
+                  });
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
           SlideFooter : Lifted(function SlideFooter(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
@@ -2884,14 +3000,16 @@ var Component =  ( function () {
                     state : state
                   };
               },["setCurrent","nextSlide","previousSlide"]),
-          CodeBlockFetchSmall : Lifted(function CodeBlockFetchSmall(props,state) {
+          Block : Lifted(function Block(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
-                  var _0 = React.createElement(imports["CodeBlock"].CodeBlockFetch,{
-                    language : scope.language,
-                    url : scope.url,
-                    className : "font-small"
-                  });
+                  var _3 = React.createElement("div",{
+                  },scope.children);
+                  var _0 = React.createElement("div",{
+                    style : {
+                      padding : "30px 0 30px 0"
+                    }
+                  },_3);
                   return {
                     result : _0,
                     state : state
@@ -2914,41 +3032,16 @@ var Component =  ( function () {
                     state : state
                   };
               },[]),
-          Slide : Lifted(function Slide(props,state) {
+          Image : Lifted(function Image(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
-                  var _2 = React.createElement(Component.SlideHeader,{
-                    slide : scope.slide
+                  var _0 = React.createElement("img",{
+                    src : scope.src,
+                    style : {
+                      maxWidth : "100%",
+                      height : "auto"
+                    }
                   });
-                  var _5 = React.createElement(Component.VSpace,{
-                  });
-                  var _6 = getSlide_content(state,scope.slide);
-                  var _3 = React.createElement("div",{
-                    className : "slide-content"
-                  },_5,_6);
-                  var _7 = React.createElement(Component.SlideFooter,{
-                    slide : scope.slide
-                  });
-                  var _0 = React.createElement("div",{
-                    className : "slide"
-                  },_2,_3,_7);
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          TwoColumn : Lifted(function TwoColumn(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _2 = React.createElement("div",{
-                    className : "pure-u-1-2"
-                  },scope.left);
-                  var _4 = React.createElement("div",{
-                    className : "pure-u-1-2"
-                  },scope.right);
-                  var _0 = React.createElement("div",{
-                    className : "pure-g"
-                  },_2,_4);
                   return {
                     result : _0,
                     state : state
@@ -2965,14 +3058,35 @@ var Component =  ( function () {
                     state : state
                   };
               },["init"]),
-          CodeBlockFetchTiny : Lifted(function CodeBlockFetchTiny(props,state) {
+          List : Lifted(function List(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
-                  var _0 = React.createElement(imports["CodeBlock"].CodeBlockFetch,{
-                    language : scope.language,
-                    url : scope.url,
-                    className : "font-tiny"
-                  });
+                  var _0 = React.createElement("ul",{
+                    className : "slide-list"
+                  },scope.children);
+                  return {
+                    result : _0,
+                    state : state
+                  };
+              },[]),
+          FourColumn : Lifted(function FourColumn(props,state) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 = React.createElement("div",{
+                    className : "pure-u-1-4"
+                  },scope.v1);
+                  var _4 = React.createElement("div",{
+                    className : "pure-u-1-4"
+                  },scope.v2);
+                  var _6 = React.createElement("div",{
+                    className : "pure-u-1-4"
+                  },scope.v3);
+                  var _8 = React.createElement("div",{
+                    className : "pure-u-1-4"
+                  },scope.v4);
+                  var _0 = React.createElement("div",{
+                    className : "pure-g"
+                  },_2,_4,_6,_8);
                   return {
                     result : _0,
                     state : state
@@ -2999,68 +3113,14 @@ var Component =  ( function () {
                     state : state
                   };
               },[]),
-          Image : Lifted(function Image(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _0 = React.createElement("img",{
-                    src : scope.src,
-                    style : {
-                      maxWidth : "100%",
-                      height : "auto"
-                    }
-                  });
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          CodeBlockFetch : Lifted(function CodeBlockFetch(props,state) {
+          CodeBlockFetchTiny : Lifted(function CodeBlockFetchTiny(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
                   var _0 = React.createElement(imports["CodeBlock"].CodeBlockFetch,{
                     language : scope.language,
                     url : scope.url,
-                    className : "font-normal"
+                    className : "font-tiny"
                   });
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          Block : Lifted(function Block(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _3 = React.createElement("div",{
-                  },scope.children);
-                  var _0 = React.createElement("div",{
-                    style : {
-                      padding : "30px 0 30px 0"
-                    }
-                  },_3);
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          VSpace : Lifted(function VSpace(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _0 = React.createElement("br",{
-                    style : {
-                      height : "50x=px"
-                    }
-                  });
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          List : Lifted(function List(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _0 = React.createElement("ul",{
-                    className : "slide-list"
-                  },scope.children);
                   return {
                     result : _0,
                     state : state
@@ -3083,29 +3143,6 @@ var Component =  ( function () {
                     state : state
                   };
               },["toggleFooter"]),
-          FourColumn : Lifted(function FourColumn(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _2 = React.createElement("div",{
-                    className : "pure-u-1-4"
-                  },scope.v1);
-                  var _4 = React.createElement("div",{
-                    className : "pure-u-1-4"
-                  },scope.v2);
-                  var _6 = React.createElement("div",{
-                    className : "pure-u-1-4"
-                  },scope.v3);
-                  var _8 = React.createElement("div",{
-                    className : "pure-u-1-4"
-                  },scope.v4);
-                  var _0 = React.createElement("div",{
-                    className : "pure-g"
-                  },_2,_4,_6,_8);
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
           Main : Lifted(function Main(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
@@ -3181,43 +3218,6 @@ var Component =  ( function () {
                     result : _0,
                     state : state
                   };
-              },[]),
-          FixedWidthImage : Lifted(function FixedWidthImage(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _3 =  ( scope.width == null ? constants.EMPTY_ARRAY : [scope.width] ) .concat("px" == null ? constants.EMPTY_ARRAY : ["px"]);
-                  var _4 = _3.join('');
-                  var _5 = _4 !== null ? "" + _4 : null;
-                  var _0 = React.createElement("img",{
-                    src : scope.src,
-                    style : {
-                      width : _5
-                    }
-                  });
-                  return {
-                    result : _0,
-                    state : state
-                  };
-              },[]),
-          ThreeColumn : Lifted(function ThreeColumn(props,state) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _2 = React.createElement("div",{
-                    className : "pure-u-1-3"
-                  },scope.left);
-                  var _4 = React.createElement("div",{
-                    className : "pure-u-1-3"
-                  },scope.middle);
-                  var _6 = React.createElement("div",{
-                    className : "pure-u-1-3"
-                  },scope.right);
-                  var _0 = React.createElement("div",{
-                    className : "pure-g"
-                  },_2,_4,_6);
-                  return {
-                    result : _0,
-                    state : state
-                  };
               },[])
         };
     } ) ();
@@ -3280,550 +3280,555 @@ function Init_init(state,action) {
   scoped(scope,_.assign({
   },action.props,{
   }),function (scope) {
-          var _391 = {
+          var _393 = {
             id : pixiedustRuntime.generateUniqueId()
           };
           newState = newState.update("Slide",function (table) {
-                  return table.set(_391.id,_391);
+                  return table.set(_393.id,_393);
               });
           scoped(scope,{
-            $this : _391.id
+            $this : _393.id
           },function (scope) {
                   newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                   newState = setSlide_title(newState,scope["$this"],"PixieDust: Declarative incremental user interfaces for IceDust");
-                  var _394 = React.createElement(imports["./examples/main"].TodoWithData,{
+                  var _396 = React.createElement(imports["./examples/main"].TodoWithData,{
                   });
-                  var _393 = React.createElement(Component.FixedWidth,{
+                  var _395 = React.createElement(Component.FixedWidth,{
                     width : 800
-                  },_394);
-                  var _392 = React.createElement(Component.Center,{
-                  },_393);
-                  newState = setSlide_content(newState,scope["$this"],_392);
+                  },_396);
+                  var _394 = React.createElement(Component.Center,{
+                  },_395);
+                  newState = setSlide_content(newState,scope["$this"],_394);
               });
           scoped(scope,{
-            intro : _391.id
+            intro : _393.id
           },function (scope) {
                   scoped(scope,{
                     $this : scope.slideshow
                   },function (scope) {
                           newState = setSlideShow_current(newState,scope["$this"],scope.intro);
                       });
-                  var _382 = {
+                  var _384 = {
                     id : pixiedustRuntime.generateUniqueId()
                   };
                   newState = newState.update("Slide",function (table) {
-                          return table.set(_382.id,_382);
+                          return table.set(_384.id,_384);
                       });
                   scoped(scope,{
-                    $this : _382.id
+                    $this : _384.id
                   },function (scope) {
                           newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                           newState = setSlide_previous(newState,scope["$this"],scope.intro);
                           newState = setSlide_title(newState,scope["$this"],"UI Pattern");
-                          var _384 = React.createElement(Component.FixedWidthImage,{
-                            src : "/images/ui.svg",
+                          var _386 = React.createElement(Component.FixedWidthImage,{
+                            src : "images/ui.svg",
                             width : 600
                           });
-                          var _383 = React.createElement(Component.TwoColumn,{
-                            left : _384,
+                          var _385 = React.createElement(Component.TwoColumn,{
+                            left : _386,
                             right : null
                           });
-                          newState = setSlide_content(newState,scope["$this"],_383);
+                          newState = setSlide_content(newState,scope["$this"],_385);
                       });
                   scoped(scope,{
-                    ui : _382.id
+                    ui : _384.id
                   },function (scope) {
-                          var _375 = {
+                          var _377 = {
                             id : pixiedustRuntime.generateUniqueId()
                           };
                           newState = newState.update("Slide",function (table) {
-                                  return table.set(_375.id,_375);
+                                  return table.set(_377.id,_377);
                               });
                           scoped(scope,{
-                            $this : _375.id
+                            $this : _377.id
                           },function (scope) {
                                   newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                   newState = setSlide_previous(newState,scope["$this"],scope.ui);
                                   newState = setSlide_title(newState,scope["$this"],"UI Pattern");
-                                  var _377 = React.createElement(Component.FixedWidthImage,{
-                                    src : "/images/ui-extended.svg",
+                                  var _379 = React.createElement(Component.FixedWidthImage,{
+                                    src : "images/ui-extended.svg",
                                     width : 600
                                   });
-                                  var _376 = React.createElement(Component.TwoColumn,{
-                                    left : _377,
+                                  var _378 = React.createElement(Component.TwoColumn,{
+                                    left : _379,
                                     right : null
                                   });
-                                  newState = setSlide_content(newState,scope["$this"],_376);
+                                  newState = setSlide_content(newState,scope["$this"],_378);
                               });
                           scoped(scope,{
-                            uiExtended : _375.id
+                            uiExtended : _377.id
                           },function (scope) {
-                                  var _355 = {
+                                  var _357 = {
                                     id : pixiedustRuntime.generateUniqueId()
                                   };
                                   newState = newState.update("Slide",function (table) {
-                                          return table.set(_355.id,_355);
+                                          return table.set(_357.id,_357);
                                       });
                                   scoped(scope,{
-                                    $this : _355.id
+                                    $this : _357.id
                                   },function (scope) {
                                           newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                           newState = setSlide_previous(newState,scope["$this"],scope.uiExtended);
                                           newState = setSlide_title(newState,scope["$this"],"UI Pattern");
-                                          var _357 = React.createElement(Component.FixedWidthImage,{
-                                            src : "/images/ui-extended.svg",
+                                          var _359 = React.createElement(Component.FixedWidthImage,{
+                                            src : "images/ui-extended.svg",
                                             width : 600
                                           });
-                                          var _359 = React.createElement("li",{
-                                          },"Incremental Rendering");
                                           var _361 = React.createElement("li",{
-                                          },"Composable views");
+                                          },"Incremental Rendering");
                                           var _363 = React.createElement("li",{
-                                          },"User input handling");
+                                          },"Composable views");
                                           var _365 = React.createElement("li",{
-                                          },"(Incremental) derived values");
+                                          },"User input handling");
                                           var _367 = React.createElement("li",{
-                                          },"Bidirectional mapping between data and view");
+                                          },"(Incremental) derived values");
                                           var _369 = React.createElement("li",{
+                                          },"Bidirectional mapping between data and view");
+                                          var _371 = React.createElement("li",{
                                           },"Undo/redo (time travelling)");
-                                          var _358 = React.createElement(Component.List,{
-                                          },_359,_361,_363,_365,_367,_369);
-                                          var _356 = React.createElement(Component.TwoColumn,{
-                                            left : _357,
-                                            right : _358
+                                          var _360 = React.createElement(Component.List,{
+                                          },_361,_363,_365,_367,_369,_371);
+                                          var _358 = React.createElement(Component.TwoColumn,{
+                                            left : _359,
+                                            right : _360
                                           });
-                                          newState = setSlide_content(newState,scope["$this"],_356);
+                                          newState = setSlide_content(newState,scope["$this"],_358);
                                       });
                                   scoped(scope,{
-                                    uiExtended2 : _355.id
+                                    uiExtended2 : _357.id
                                   },function (scope) {
-                                          var _347 = {
+                                          var _349 = {
                                             id : pixiedustRuntime.generateUniqueId()
                                           };
                                           newState = newState.update("Slide",function (table) {
-                                                  return table.set(_347.id,_347);
+                                                  return table.set(_349.id,_349);
                                               });
                                           scoped(scope,{
-                                            $this : _347.id
+                                            $this : _349.id
                                           },function (scope) {
                                                   newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                   newState = setSlide_previous(newState,scope["$this"],scope.uiExtended2);
                                                   newState = setSlide_title(newState,scope["$this"],"Todo");
-                                                  var _350 = React.createElement(imports["./examples/main"].TodoExample,{
+                                                  var _352 = React.createElement(imports["./examples/main"].TodoExample,{
                                                   });
-                                                  var _349 = React.createElement(Component.FixedWidth,{
+                                                  var _351 = React.createElement(Component.FixedWidth,{
                                                     width : 800
-                                                  },_350);
-                                                  var _348 = React.createElement(Component.Center,{
-                                                  },_349);
-                                                  newState = setSlide_content(newState,scope["$this"],_348);
+                                                  },_352);
+                                                  var _350 = React.createElement(Component.Center,{
+                                                  },_351);
+                                                  newState = setSlide_content(newState,scope["$this"],_350);
                                               });
                                           scoped(scope,{
-                                            todo : _347.id
+                                            todo : _349.id
                                           },function (scope) {
-                                                  var _336 = {
+                                                  var _338 = {
                                                     id : pixiedustRuntime.generateUniqueId()
                                                   };
                                                   newState = newState.update("Slide",function (table) {
-                                                          return table.set(_336.id,_336);
+                                                          return table.set(_338.id,_338);
                                                       });
                                                   scoped(scope,{
-                                                    $this : _336.id
+                                                    $this : _338.id
                                                   },function (scope) {
                                                           newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                           newState = setSlide_previous(newState,scope["$this"],scope.todo);
                                                           newState = setSlide_title(newState,scope["$this"],"Todo.js");
-                                                          var _338 = React.createElement(Component.CodeBlockFetchTiny,{
+                                                          var _340 = React.createElement(Component.CodeBlockFetchTiny,{
                                                             language : "js",
                                                             url : "sources/todo/redux/reducer.js"
                                                           });
-                                                          var _339 = React.createElement(Component.CodeBlockFetchTiny,{
+                                                          var _341 = React.createElement(Component.CodeBlockFetchTiny,{
                                                             language : "js",
                                                             url : "sources/todo/redux/view1.js"
                                                           });
-                                                          var _340 = React.createElement(Component.CodeBlockFetchTiny,{
+                                                          var _342 = React.createElement(Component.CodeBlockFetchTiny,{
                                                             language : "js",
                                                             url : "sources/todo/redux/view2.js"
                                                           });
-                                                          var _341 = React.createElement(Component.CodeBlockFetchTiny,{
+                                                          var _343 = React.createElement(Component.CodeBlockFetchTiny,{
                                                             language : "js",
                                                             url : "sources/todo/redux/view3.js"
                                                           });
-                                                          var _342 = React.createElement(Component.CodeBlockFetchTiny,{
+                                                          var _344 = React.createElement(Component.CodeBlockFetchTiny,{
                                                             language : "js",
                                                             url : "sources/todo/redux/view4.js"
                                                           });
-                                                          var _337 = React.createElement(Component.FiveColumn,{
-                                                            v1 : _338,
-                                                            v2 : _339,
-                                                            v3 : _340,
-                                                            v4 : _341,
-                                                            v5 : _342
+                                                          var _339 = React.createElement(Component.FiveColumn,{
+                                                            v1 : _340,
+                                                            v2 : _341,
+                                                            v3 : _342,
+                                                            v4 : _343,
+                                                            v5 : _344
                                                           });
-                                                          newState = setSlide_content(newState,scope["$this"],_337);
+                                                          newState = setSlide_content(newState,scope["$this"],_339);
                                                       });
                                                   scoped(scope,{
-                                                    todoRedux : _336.id
+                                                    todoRedux : _338.id
                                                   },function (scope) {
-                                                          var _329 = {
+                                                          var _331 = {
                                                             id : pixiedustRuntime.generateUniqueId()
                                                           };
                                                           newState = newState.update("Slide",function (table) {
-                                                                  return table.set(_329.id,_329);
+                                                                  return table.set(_331.id,_331);
                                                               });
                                                           scoped(scope,{
-                                                            $this : _329.id
+                                                            $this : _331.id
                                                           },function (scope) {
                                                                   newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                   newState = setSlide_previous(newState,scope["$this"],scope.todoRedux);
                                                                   newState = setSlide_title(newState,scope["$this"],"Todo.pix");
-                                                                  var _331 = React.createElement(Component.CodeBlockFetch,{
+                                                                  var _333 = React.createElement(Component.CodeBlockFetch,{
                                                                     language : "pix",
                                                                     url : "sources/todo/todo1.pix"
                                                                   });
-                                                                  var _330 = React.createElement(Component.WideTwoColumn,{
-                                                                    left : _331,
+                                                                  var _332 = React.createElement(Component.WideTwoColumn,{
+                                                                    left : _333,
                                                                     right : null
                                                                   });
-                                                                  newState = setSlide_content(newState,scope["$this"],_330);
+                                                                  newState = setSlide_content(newState,scope["$this"],_332);
                                                               });
                                                           scoped(scope,{
-                                                            todo1 : _329.id
+                                                            todo1 : _331.id
                                                           },function (scope) {
-                                                                  var _321 = {
+                                                                  var _323 = {
                                                                     id : pixiedustRuntime.generateUniqueId()
                                                                   };
                                                                   newState = newState.update("Slide",function (table) {
-                                                                          return table.set(_321.id,_321);
+                                                                          return table.set(_323.id,_323);
                                                                       });
                                                                   scoped(scope,{
-                                                                    $this : _321.id
+                                                                    $this : _323.id
                                                                   },function (scope) {
                                                                           newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                           newState = setSlide_previous(newState,scope["$this"],scope.todo1);
                                                                           newState = setSlide_title(newState,scope["$this"],"Todo.pix");
-                                                                          var _323 = React.createElement(Component.CodeBlockFetch,{
+                                                                          var _325 = React.createElement(Component.CodeBlockFetch,{
                                                                             language : "pix",
                                                                             url : "sources/todo/todo2.pix"
                                                                           });
-                                                                          var _324 = React.createElement(imports["./examples/main"].Todo2,{
+                                                                          var _326 = React.createElement(imports["./examples/main"].Todo2,{
                                                                           });
-                                                                          var _322 = React.createElement(Component.WideTwoColumn,{
-                                                                            left : _323,
-                                                                            right : _324
+                                                                          var _324 = React.createElement(Component.WideTwoColumn,{
+                                                                            left : _325,
+                                                                            right : _326
                                                                           });
-                                                                          newState = setSlide_content(newState,scope["$this"],_322);
+                                                                          newState = setSlide_content(newState,scope["$this"],_324);
                                                                       });
                                                                   scoped(scope,{
-                                                                    todo2 : _321.id
+                                                                    todo2 : _323.id
                                                                   },function (scope) {
-                                                                          var _313 = {
+                                                                          var _315 = {
                                                                             id : pixiedustRuntime.generateUniqueId()
                                                                           };
                                                                           newState = newState.update("Slide",function (table) {
-                                                                                  return table.set(_313.id,_313);
+                                                                                  return table.set(_315.id,_315);
                                                                               });
                                                                           scoped(scope,{
-                                                                            $this : _313.id
+                                                                            $this : _315.id
                                                                           },function (scope) {
                                                                                   newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                                   newState = setSlide_previous(newState,scope["$this"],scope.todo2);
                                                                                   newState = setSlide_title(newState,scope["$this"],"Todo.pix");
-                                                                                  var _315 = React.createElement(Component.CodeBlockFetch,{
+                                                                                  var _317 = React.createElement(Component.CodeBlockFetch,{
                                                                                     language : "pix",
                                                                                     url : "sources/todo/todo3.pix"
                                                                                   });
-                                                                                  var _316 = React.createElement(imports["./examples/main"].Todo3,{
+                                                                                  var _318 = React.createElement(imports["./examples/main"].Todo3,{
                                                                                   });
-                                                                                  var _314 = React.createElement(Component.WideTwoColumn,{
-                                                                                    left : _315,
-                                                                                    right : _316
+                                                                                  var _316 = React.createElement(Component.WideTwoColumn,{
+                                                                                    left : _317,
+                                                                                    right : _318
                                                                                   });
-                                                                                  newState = setSlide_content(newState,scope["$this"],_314);
+                                                                                  newState = setSlide_content(newState,scope["$this"],_316);
                                                                               });
                                                                           scoped(scope,{
-                                                                            todo3 : _313.id
+                                                                            todo3 : _315.id
                                                                           },function (scope) {
-                                                                                  var _305 = {
+                                                                                  var _307 = {
                                                                                     id : pixiedustRuntime.generateUniqueId()
                                                                                   };
                                                                                   newState = newState.update("Slide",function (table) {
-                                                                                          return table.set(_305.id,_305);
+                                                                                          return table.set(_307.id,_307);
                                                                                       });
                                                                                   scoped(scope,{
-                                                                                    $this : _305.id
+                                                                                    $this : _307.id
                                                                                   },function (scope) {
                                                                                           newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                                           newState = setSlide_previous(newState,scope["$this"],scope.todo3);
                                                                                           newState = setSlide_title(newState,scope["$this"],"Todo.pix");
-                                                                                          var _307 = React.createElement(Component.CodeBlockFetch,{
+                                                                                          var _309 = React.createElement(Component.CodeBlockFetch,{
                                                                                             language : "pix",
                                                                                             url : "sources/todo/todo4.pix"
                                                                                           });
-                                                                                          var _308 = React.createElement(imports["./examples/main"].Todo4,{
+                                                                                          var _310 = React.createElement(imports["./examples/main"].Todo4,{
                                                                                           });
-                                                                                          var _306 = React.createElement(Component.WideTwoColumn,{
-                                                                                            left : _307,
-                                                                                            right : _308
+                                                                                          var _308 = React.createElement(Component.WideTwoColumn,{
+                                                                                            left : _309,
+                                                                                            right : _310
                                                                                           });
-                                                                                          newState = setSlide_content(newState,scope["$this"],_306);
+                                                                                          newState = setSlide_content(newState,scope["$this"],_308);
                                                                                       });
                                                                                   scoped(scope,{
-                                                                                    todo4 : _305.id
+                                                                                    todo4 : _307.id
                                                                                   },function (scope) {
-                                                                                          var _297 = {
+                                                                                          var _299 = {
                                                                                             id : pixiedustRuntime.generateUniqueId()
                                                                                           };
                                                                                           newState = newState.update("Slide",function (table) {
-                                                                                                  return table.set(_297.id,_297);
+                                                                                                  return table.set(_299.id,_299);
                                                                                               });
                                                                                           scoped(scope,{
-                                                                                            $this : _297.id
+                                                                                            $this : _299.id
                                                                                           },function (scope) {
                                                                                                   newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                                                   newState = setSlide_previous(newState,scope["$this"],scope.todo4);
                                                                                                   newState = setSlide_title(newState,scope["$this"],"Todo.pix");
-                                                                                                  var _299 = React.createElement(Component.CodeBlockFetch,{
+                                                                                                  var _301 = React.createElement(Component.CodeBlockFetch,{
                                                                                                     language : "pix",
                                                                                                     url : "sources/todo/todo5.pix"
                                                                                                   });
-                                                                                                  var _300 = React.createElement(imports["./examples/main"].Todo5,{
+                                                                                                  var _302 = React.createElement(imports["./examples/main"].Todo5,{
                                                                                                   });
-                                                                                                  var _298 = React.createElement(Component.WideTwoColumn,{
-                                                                                                    left : _299,
-                                                                                                    right : _300
+                                                                                                  var _300 = React.createElement(Component.WideTwoColumn,{
+                                                                                                    left : _301,
+                                                                                                    right : _302
                                                                                                   });
-                                                                                                  newState = setSlide_content(newState,scope["$this"],_298);
+                                                                                                  newState = setSlide_content(newState,scope["$this"],_300);
                                                                                               });
                                                                                           scoped(scope,{
-                                                                                            todo5 : _297.id
+                                                                                            todo5 : _299.id
                                                                                           },function (scope) {
-                                                                                                  var _289 = {
+                                                                                                  var _291 = {
                                                                                                     id : pixiedustRuntime.generateUniqueId()
                                                                                                   };
                                                                                                   newState = newState.update("Slide",function (table) {
-                                                                                                          return table.set(_289.id,_289);
+                                                                                                          return table.set(_291.id,_291);
                                                                                                       });
                                                                                                   scoped(scope,{
-                                                                                                    $this : _289.id
+                                                                                                    $this : _291.id
                                                                                                   },function (scope) {
                                                                                                           newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                                                           newState = setSlide_previous(newState,scope["$this"],scope.todo5);
                                                                                                           newState = setSlide_title(newState,scope["$this"],"Todo.pix");
-                                                                                                          var _291 = React.createElement(Component.CodeBlockFetch,{
+                                                                                                          var _293 = React.createElement(Component.CodeBlockFetch,{
                                                                                                             language : "pix",
                                                                                                             url : "sources/todo/todo6.pix"
                                                                                                           });
-                                                                                                          var _292 = React.createElement(imports["./examples/main"].Todo6,{
+                                                                                                          var _294 = React.createElement(imports["./examples/main"].Todo6,{
                                                                                                           });
-                                                                                                          var _290 = React.createElement(Component.WideTwoColumn,{
-                                                                                                            left : _291,
-                                                                                                            right : _292
+                                                                                                          var _292 = React.createElement(Component.WideTwoColumn,{
+                                                                                                            left : _293,
+                                                                                                            right : _294
                                                                                                           });
-                                                                                                          newState = setSlide_content(newState,scope["$this"],_290);
+                                                                                                          newState = setSlide_content(newState,scope["$this"],_292);
                                                                                                       });
                                                                                                   scoped(scope,{
-                                                                                                    todo6 : _289.id
+                                                                                                    todo6 : _291.id
                                                                                                   },function (scope) {
-                                                                                                          var _281 = {
+                                                                                                          var _283 = {
                                                                                                             id : pixiedustRuntime.generateUniqueId()
                                                                                                           };
                                                                                                           newState = newState.update("Slide",function (table) {
-                                                                                                                  return table.set(_281.id,_281);
+                                                                                                                  return table.set(_283.id,_283);
                                                                                                               });
                                                                                                           scoped(scope,{
-                                                                                                            $this : _281.id
+                                                                                                            $this : _283.id
                                                                                                           },function (scope) {
                                                                                                                   newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                                                                   newState = setSlide_previous(newState,scope["$this"],scope.todo6);
                                                                                                                   newState = setSlide_title(newState,scope["$this"],"Todo.pix");
-                                                                                                                  var _283 = React.createElement(Component.CodeBlockFetch,{
+                                                                                                                  var _285 = React.createElement(Component.CodeBlockFetch,{
                                                                                                                     language : "pix",
                                                                                                                     url : "sources/todo/todo7.pix"
                                                                                                                   });
-                                                                                                                  var _284 = React.createElement(imports["./examples/main"].Todo7,{
+                                                                                                                  var _286 = React.createElement(imports["./examples/main"].Todo7,{
                                                                                                                   });
-                                                                                                                  var _282 = React.createElement(Component.WideTwoColumn,{
-                                                                                                                    left : _283,
-                                                                                                                    right : _284
+                                                                                                                  var _284 = React.createElement(Component.WideTwoColumn,{
+                                                                                                                    left : _285,
+                                                                                                                    right : _286
                                                                                                                   });
-                                                                                                                  newState = setSlide_content(newState,scope["$this"],_282);
+                                                                                                                  newState = setSlide_content(newState,scope["$this"],_284);
                                                                                                               });
                                                                                                           scoped(scope,{
-                                                                                                            todo7 : _281.id
+                                                                                                            todo7 : _283.id
                                                                                                           },function (scope) {
-                                                                                                                  var _273 = {
+                                                                                                                  var _275 = {
                                                                                                                     id : pixiedustRuntime.generateUniqueId()
                                                                                                                   };
                                                                                                                   newState = newState.update("Slide",function (table) {
-                                                                                                                          return table.set(_273.id,_273);
+                                                                                                                          return table.set(_275.id,_275);
                                                                                                                       });
                                                                                                                   scoped(scope,{
-                                                                                                                    $this : _273.id
+                                                                                                                    $this : _275.id
                                                                                                                   },function (scope) {
                                                                                                                           newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                                                                           newState = setSlide_previous(newState,scope["$this"],scope.todo7);
                                                                                                                           newState = setSlide_title(newState,scope["$this"],"Todo.pix");
-                                                                                                                          var _275 = React.createElement(Component.CodeBlockFetch,{
+                                                                                                                          var _277 = React.createElement(Component.CodeBlockFetch,{
                                                                                                                             language : "pix",
                                                                                                                             url : "sources/todo/todo8.pix"
                                                                                                                           });
-                                                                                                                          var _276 = React.createElement(imports["./examples/main"].Todo8,{
+                                                                                                                          var _278 = React.createElement(imports["./examples/main"].Todo8,{
                                                                                                                           });
-                                                                                                                          var _274 = React.createElement(Component.WideTwoColumn,{
-                                                                                                                            left : _275,
-                                                                                                                            right : _276
+                                                                                                                          var _276 = React.createElement(Component.WideTwoColumn,{
+                                                                                                                            left : _277,
+                                                                                                                            right : _278
                                                                                                                           });
-                                                                                                                          newState = setSlide_content(newState,scope["$this"],_274);
+                                                                                                                          newState = setSlide_content(newState,scope["$this"],_276);
                                                                                                                       });
                                                                                                                   scoped(scope,{
-                                                                                                                    todo8 : _273.id
+                                                                                                                    todo8 : _275.id
                                                                                                                   },function (scope) {
-                                                                                                                          var _265 = {
+                                                                                                                          var _267 = {
                                                                                                                             id : pixiedustRuntime.generateUniqueId()
                                                                                                                           };
                                                                                                                           newState = newState.update("Slide",function (table) {
-                                                                                                                                  return table.set(_265.id,_265);
+                                                                                                                                  return table.set(_267.id,_267);
                                                                                                                               });
                                                                                                                           scoped(scope,{
-                                                                                                                            $this : _265.id
+                                                                                                                            $this : _267.id
                                                                                                                           },function (scope) {
                                                                                                                                   newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                                                                                   newState = setSlide_previous(newState,scope["$this"],scope.todo8);
                                                                                                                                   newState = setSlide_title(newState,scope["$this"],"Todo.pix");
-                                                                                                                                  var _267 = React.createElement(Component.CodeBlockFetch,{
+                                                                                                                                  var _269 = React.createElement(Component.CodeBlockFetch,{
                                                                                                                                     language : "pix",
                                                                                                                                     url : "sources/todo/todo9.pix"
                                                                                                                                   });
-                                                                                                                                  var _268 = React.createElement(imports["./examples/main"].Todo9,{
+                                                                                                                                  var _270 = React.createElement(imports["./examples/main"].Todo9,{
                                                                                                                                   });
-                                                                                                                                  var _266 = React.createElement(Component.WideTwoColumn,{
-                                                                                                                                    left : _267,
-                                                                                                                                    right : _268
+                                                                                                                                  var _268 = React.createElement(Component.WideTwoColumn,{
+                                                                                                                                    left : _269,
+                                                                                                                                    right : _270
                                                                                                                                   });
-                                                                                                                                  newState = setSlide_content(newState,scope["$this"],_266);
+                                                                                                                                  newState = setSlide_content(newState,scope["$this"],_268);
                                                                                                                               });
                                                                                                                           scoped(scope,{
-                                                                                                                            todo9 : _265.id
+                                                                                                                            todo9 : _267.id
                                                                                                                           },function (scope) {
-                                                                                                                                  var _257 = {
+                                                                                                                                  var _259 = {
                                                                                                                                     id : pixiedustRuntime.generateUniqueId()
                                                                                                                                   };
                                                                                                                                   newState = newState.update("Slide",function (table) {
-                                                                                                                                          return table.set(_257.id,_257);
+                                                                                                                                          return table.set(_259.id,_259);
                                                                                                                                       });
                                                                                                                                   scoped(scope,{
-                                                                                                                                    $this : _257.id
+                                                                                                                                    $this : _259.id
                                                                                                                                   },function (scope) {
                                                                                                                                           newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                                                                                           newState = setSlide_previous(newState,scope["$this"],scope.todo9);
                                                                                                                                           newState = setSlide_title(newState,scope["$this"],"Todo.pix");
-                                                                                                                                          var _259 = React.createElement(Component.CodeBlockFetch,{
+                                                                                                                                          var _261 = React.createElement(Component.CodeBlockFetch,{
                                                                                                                                             language : "pix",
                                                                                                                                             url : "sources/todo/todo10.pix"
                                                                                                                                           });
-                                                                                                                                          var _260 = React.createElement(imports["./examples/main"].Todo10,{
+                                                                                                                                          var _262 = React.createElement(imports["./examples/main"].Todo10,{
                                                                                                                                           });
-                                                                                                                                          var _258 = React.createElement(Component.WideTwoColumn,{
-                                                                                                                                            left : _259,
-                                                                                                                                            right : _260
+                                                                                                                                          var _260 = React.createElement(Component.WideTwoColumn,{
+                                                                                                                                            left : _261,
+                                                                                                                                            right : _262
                                                                                                                                           });
-                                                                                                                                          newState = setSlide_content(newState,scope["$this"],_258);
+                                                                                                                                          newState = setSlide_content(newState,scope["$this"],_260);
                                                                                                                                       });
                                                                                                                                   scoped(scope,{
-                                                                                                                                    todo10 : _257.id
+                                                                                                                                    todo10 : _259.id
                                                                                                                                   },function (scope) {
-                                                                                                                                          var _250 = {
+                                                                                                                                          var _252 = {
                                                                                                                                             id : pixiedustRuntime.generateUniqueId()
                                                                                                                                           };
                                                                                                                                           newState = newState.update("Slide",function (table) {
-                                                                                                                                                  return table.set(_250.id,_250);
+                                                                                                                                                  return table.set(_252.id,_252);
                                                                                                                                               });
                                                                                                                                           scoped(scope,{
-                                                                                                                                            $this : _250.id
+                                                                                                                                            $this : _252.id
                                                                                                                                           },function (scope) {
                                                                                                                                                   newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                                                                                                   newState = setSlide_previous(newState,scope["$this"],scope.todo10);
                                                                                                                                                   newState = setSlide_title(newState,scope["$this"],"Model");
-                                                                                                                                                  var _252 = React.createElement(Component.CodeBlockFetch,{
+                                                                                                                                                  var _254 = React.createElement(Component.CodeBlockFetch,{
                                                                                                                                                     language : "pix",
                                                                                                                                                     url : "sources/runtime/entitymapping.pix"
                                                                                                                                                   });
-                                                                                                                                                  var _251 = React.createElement(Component.TwoColumn,{
-                                                                                                                                                    left : _252,
+                                                                                                                                                  var _253 = React.createElement(Component.TwoColumn,{
+                                                                                                                                                    left : _254,
                                                                                                                                                     right : null
                                                                                                                                                   });
-                                                                                                                                                  newState = setSlide_content(newState,scope["$this"],_251);
+                                                                                                                                                  newState = setSlide_content(newState,scope["$this"],_253);
                                                                                                                                               });
                                                                                                                                           scoped(scope,{
-                                                                                                                                            immutable1 : _250.id
+                                                                                                                                            immutable1 : _252.id
                                                                                                                                           },function (scope) {
-                                                                                                                                                  var _240 = {
+                                                                                                                                                  var _242 = {
                                                                                                                                                     id : pixiedustRuntime.generateUniqueId()
                                                                                                                                                   };
                                                                                                                                                   newState = newState.update("Slide",function (table) {
-                                                                                                                                                          return table.set(_240.id,_240);
+                                                                                                                                                          return table.set(_242.id,_242);
                                                                                                                                                       });
                                                                                                                                                   scoped(scope,{
-                                                                                                                                                    $this : _240.id
+                                                                                                                                                    $this : _242.id
                                                                                                                                                   },function (scope) {
                                                                                                                                                           newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                                                                                                           newState = setSlide_previous(newState,scope["$this"],scope.immutable1);
                                                                                                                                                           newState = setSlide_title(newState,scope["$this"],"Model");
-                                                                                                                                                          var _244 = React.createElement(Component.CodeBlockFetch,{
+                                                                                                                                                          var _246 = React.createElement(Component.CodeBlockFetch,{
                                                                                                                                                             language : "pix",
                                                                                                                                                             url : "sources/runtime/entitymapping.pix"
                                                                                                                                                           });
-                                                                                                                                                          var _245 = React.createElement(Component.FixedWidthImage,{
+                                                                                                                                                          var _247 = React.createElement(Component.FixedWidthImage,{
                                                                                                                                                             src : "images/foo.svg",
                                                                                                                                                             width : 700
                                                                                                                                                           });
-                                                                                                                                                          var _242 = React.createElement("div",{
-                                                                                                                                                          },_244,_245);
-                                                                                                                                                          var _241 = React.createElement(Component.TwoColumn,{
-                                                                                                                                                            left : _242,
+                                                                                                                                                          var _244 = React.createElement("div",{
+                                                                                                                                                          },_246,_247);
+                                                                                                                                                          var _243 = React.createElement(Component.TwoColumn,{
+                                                                                                                                                            left : _244,
                                                                                                                                                             right : null
                                                                                                                                                           });
-                                                                                                                                                          newState = setSlide_content(newState,scope["$this"],_241);
+                                                                                                                                                          newState = setSlide_content(newState,scope["$this"],_243);
                                                                                                                                                       });
                                                                                                                                                   scoped(scope,{
-                                                                                                                                                    immutable2 : _240.id
+                                                                                                                                                    immutable2 : _242.id
                                                                                                                                                   },function (scope) {
-                                                                                                                                                          var _229 = {
+                                                                                                                                                          var _231 = {
                                                                                                                                                             id : pixiedustRuntime.generateUniqueId()
                                                                                                                                                           };
                                                                                                                                                           newState = newState.update("Slide",function (table) {
-                                                                                                                                                                  return table.set(_229.id,_229);
+                                                                                                                                                                  return table.set(_231.id,_231);
                                                                                                                                                               });
                                                                                                                                                           scoped(scope,{
-                                                                                                                                                            $this : _229.id
+                                                                                                                                                            $this : _231.id
                                                                                                                                                           },function (scope) {
                                                                                                                                                                   newState = setSlide_slideshow(newState,scope["$this"],scope.slideshow);
                                                                                                                                                                   newState = setSlide_previous(newState,scope["$this"],scope.immutable2);
                                                                                                                                                                   newState = setSlide_title(newState,scope["$this"],"Model");
-                                                                                                                                                                  var _233 = React.createElement(Component.CodeBlockFetch,{
+                                                                                                                                                                  var _235 = React.createElement(Component.CodeBlockFetch,{
                                                                                                                                                                     language : "pix",
                                                                                                                                                                     url : "sources/runtime/entitymapping.pix"
                                                                                                                                                                   });
-                                                                                                                                                                  var _234 = React.createElement(Component.FixedWidthImage,{
+                                                                                                                                                                  var _236 = React.createElement(Component.FixedWidthImage,{
                                                                                                                                                                     src : "images/foo.svg",
                                                                                                                                                                     width : 700
                                                                                                                                                                   });
-                                                                                                                                                                  var _231 = React.createElement("div",{
-                                                                                                                                                                  },_233,_234);
-                                                                                                                                                                  var _235 = React.createElement(Component.CodeBlockFetch,{
+                                                                                                                                                                  var _233 = React.createElement("div",{
+                                                                                                                                                                  },_235,_236);
+                                                                                                                                                                  var _237 = React.createElement(Component.CodeBlockFetch,{
                                                                                                                                                                     language : "js",
                                                                                                                                                                     url : "sources/runtime/entitymapping.js"
                                                                                                                                                                   });
-                                                                                                                                                                  var _230 = React.createElement(Component.TwoColumn,{
-                                                                                                                                                                    left : _231,
-                                                                                                                                                                    right : _235
+                                                                                                                                                                  var _232 = React.createElement(Component.TwoColumn,{
+                                                                                                                                                                    left : _233,
+                                                                                                                                                                    right : _237
                                                                                                                                                                   });
-                                                                                                                                                                  newState = setSlide_content(newState,scope["$this"],_230);
+                                                                                                                                                                  newState = setSlide_content(newState,scope["$this"],_232);
                                                                                                                                                               });
                                                                                                                                                           scoped(scope,{
-                                                                                                                                                            immutable3 : _229.id
+                                                                                                                                                            immutable3 : _231.id
                                                                                                                                                           },function (scope) {
+                                                                                                                                                                  scoped(scope,{
+                                                                                                                                                                    $this : scope.slideshow
+                                                                                                                                                                  },function (scope) {
+                                                                                                                                                                          newState = setSlideShow_current(newState,scope["$this"],scope.immutable1);
+                                                                                                                                                                      });
                                                                                                                                                                   var _218 = {
                                                                                                                                                                     id : pixiedustRuntime.generateUniqueId()
                                                                                                                                                                   };

@@ -110,7 +110,7 @@ view
         previous = intro
         title = "UI Pattern"
         content = @TwoColumn(
-          @FixedWidthImage("/images/ui.svg", 600)
+          @FixedWidthImage("images/ui.svg", 600)
         , no value
         )
       }
@@ -120,7 +120,7 @@ view
         previous = ui
         title = "UI Pattern"
         content = @TwoColumn(
-          @FixedWidthImage("/images/ui-extended.svg", 600)
+          @FixedWidthImage("images/ui-extended.svg", 600)
         , no value
         )
       }
@@ -130,7 +130,7 @@ view
         previous = uiExtended
         title = "UI Pattern"
         content = @TwoColumn( 
-          @FixedWidthImage("/images/ui-extended.svg", 600)
+          @FixedWidthImage("images/ui-extended.svg", 600)
         , @List {
             li { "Incremental Rendering" }
             li { "Composable views" }
