@@ -1,0 +1,19 @@
+entity Student {
+    name : String
+  }
+
+entity Course {
+  name : String
+  avgGrade: Float? = avg(submissions.grade2)
+}
+
+entity Submission {
+  grade: Float?
+  grade2 : Float? =  if(pass) grade
+  pass: Boolean = grade > 5.5 <+ false
+}
+
+relation Course.submissions *
+   <-> 1 Submission.course
+relation Submission.student 1
+   <-> * Student.submissions

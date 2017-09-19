@@ -1,0 +1,6 @@
+component TodoItem(todo: Todo){
+  li {
+    @BooleanInput(todo.finished)
+    @FocusStringInput(todo.task)
+  }
+}

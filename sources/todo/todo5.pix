@@ -1,0 +1,19 @@
+entity TodoList {
+  input  : String
+}
+
+component TodoList(list: TodoList) {
+  h1 { "Todos" }
+  @StringInput(list.input, addTodo)
+  ul {
+    for(todo in list.todos) @TodoItem(todo)
+  }
+
+  action addTodo(task: String){
+    t: Todo {
+      list = list
+      task = task
+    }
+    list { input = "" }
+  }
+}

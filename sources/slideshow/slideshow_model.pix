@@ -1,0 +1,14 @@
+entity SlideShow{
+  totalSlides: Int = current.slideNumber + current.slidesLeft <+ 0
+}
+
+entity Slide {
+  title: String
+  content: View?
+
+  slideNumber : Int = previous.slideNumber + 1 <+ 1
+  slidesLeft: Int = 1 + next.slidesLeft <+ 0
+}
+
+relation Slide.slideshow 1 <-> * SlideShow.slides
+relation SlideShow.current ? <-> ? Slide.inverseCurrent

@@ -46,6 +46,7 @@ html, body {
 .slide-footer {
 	height: 52px;
 	width: 100%;
+	overflow-x: hidden;
 }
 
 .slide-selector {
@@ -56,6 +57,7 @@ html, body {
 .slide-selector-item {
 	flex-grow: 1;
 	text-align: center;
+	min-width: 50px;
 }
 .slide-selector-item-selected {
 	background-color: #00b3ee;
@@ -83,4 +85,27 @@ group{height: 100%;}
 
 .hljs{
 	white-space: pre-wrap;
+}
+
+.slide-list {
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.slide-list li{
+	padding: 10px;
+	font-size: 40px;
+}
+
+.font-normal {
+	font-size: 30px;
+}
+
+.font-small {
+	font-size: 16px;
+}
+
+.font-tiny{
+	font-size: 10px;
 }

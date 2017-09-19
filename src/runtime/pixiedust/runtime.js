@@ -23,7 +23,7 @@ function makeReducer(actions, debug, optionalActions){
     optionalActions = defaultOptionalActions;
   }
 
-  var stateUpdateActionPattern = /^cacheUpdate(\[.+\])$/;
+  var stateUpdateActionPattern = /^cacheUpdate(\[.*\])$/;
   
   function reducer(state, message){
     console.log(message)

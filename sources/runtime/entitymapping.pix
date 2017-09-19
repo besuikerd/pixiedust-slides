@@ -1,0 +1,8 @@
+entity Todo {
+  task     : String
+  finished : Boolean = false (default)
+  pretty   : String = task + "!"
+}
+entity TodoList {}
+
+relation Todo.list 1 <-> * TodoList.todos

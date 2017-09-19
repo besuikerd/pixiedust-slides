@@ -1,0 +1,10 @@
+todosLeft  : Int    = (todos \ finishedTodos).count()
+itemPlural : String =
+  if(todosLeft == 1)
+    "item"
+  else
+    "items"
+
+span {
+  "${list.todosLeft} ${list.itemPlural} left"
+}

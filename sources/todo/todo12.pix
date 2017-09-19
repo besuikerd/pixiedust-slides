@@ -1,0 +1,121 @@
+  model
+    entity TodoApp{
+      input: String
+      filter: String = "All" (default)
+      allFinished: Boolean = conj(todos.finished)
+      todosLeft: Int = (todos \ finishedTodos).count()
+    }
+
+    entity Todo {
+      task: String
+      finished: Boolean = false (default)
+    }
+
+    relation TodoApp.todos * <-> 1 Todo.app
+
+    relation TodoApp.finishedTodos =
+      todos.filter(todo.finished) <-> Todo
+    relation TodoApp.visibleTodos =
+      switch {
+        case filter == "All" => todos
+        case filter == "Completed" => finishedTodos
+        case filter == "Not Completed" => todos \ finishedTodos
+      } <-> Todo
+
++   relation TodoApp.editing ? <-> ? Todo
+
+  imports
+    pixiedust/components/native/inputs {
+      component StringInput(ref value: String, onSubmit: Action[String])
++     component AutoFocusStringInput(ref value: String, visible: Boolean, onSubmit: Action[])
+    }
+
+  view
+    component TodoApp(app: TodoApp){
+      action addTodo(task: String){
+        t: Todo {
+          app = app
+          task = task
+        }
+        app { input = "" }
+      }
+
+      action toggleAll(){
+        app.todos {
+          finished = !app.allFinished
+        }
+      }
+
+      h1 { "Todos" }
+      @BooleanInput(app.allFinished, toggleAll)
+      @StringInput(app.input, addTodo)
+      for(todo in app.visibleTodos) @TodoItem(todo)
+      @TodoFooter(app)
+    }
+
+    component TodoItem(todo: Todo) {
+      action toggleFinished(){
+        todo { finished = !finished }
+      }
+
+      action removeTodo(){
+        todo.app { todos = todos \ todo }
+      }
+
+      action editTodo(){
+        todo.app { editing = todo }
+      }
+
+      action finishEditing(){
+        todo.app { editing = no value }
+      }
+
+      @BooleanInput(todo.finished, toggleFinished)
++     label[onDoubleClick=editTodo()] { todo.task }
+      button[onClick=removeTodo()]{ "Remove" }
++     @AutoFocusStringInput(todo.task, todo.app.editing == todo, finishEditing)
+    }
+
+    component BooleanInput(checked: Boolean, onChange: Action[]) {
+      input[
+        type="checkbox"
+      , checked=checked
+      , onChange=onChange()
+      ]
+    }
+
+    component TodoFooter(app: TodoApp){
+      action clearCompleted(){
+        app {
+          todos = todos \ finishedTodos
+        }
+      }
+
+      span {
+        "${app.todosLeft} ${if(app.todosLeft == 1) "item" else "items"} left"
+      }
+      @TodoFilters(app)
+
+      if(app.finishedTodos.count() > 0)
+          a[onClick=clearCompleted()]{ "Clear completed" }
+    }
+
+    component TodoFilters(app: TodoApp) {
+        ul{
+          @FilterType("All", app)
+          @FilterType("Completed", app)
+          @FilterType("Not Completed", app)
+        }
+      }
+
+
+    component FilterType(name: String, app: TodoApp) {
+      action setFilter(){
+        app { filter = name }
+      }
+      li {
+        a[className=if(app.filter == name) "selected" else "", onClick=setFilter()] {
+          name
+        }
+      }
+    }

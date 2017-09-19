@@ -38,8 +38,10 @@ view
         rhs { value = 0 }
       }
     }
-    button[onClick=reset()]{ "Reset" }
-    @IntInput(add.lhs.value) "+" @IntInput(add.rhs.value) "=" add.value
+    div {button[onClick=reset()]{ "Reset" }}
+    div {@IntInput(add.lhs.value)  "+" } 
+    div {@IntInput(add.rhs.value)  "=" } 
+    div {add.value}
   }
 
 data

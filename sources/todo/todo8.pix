@@ -1,0 +1,7 @@
+allFinished : Boolean = conj(todos.finished)
+
+action toggleAll(){
+  list.todos {
+    finished = !app.allFinished
+  }
+}

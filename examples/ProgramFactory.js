@@ -2,6 +2,7 @@ var React = require('react');
 var runtime = require('pixiedust/runtime');
 var PixieDustProvider = require('pixiedust/components/PixieDustProvider');
 var Class = require('jsface').Class;
+var _ = require('lodash');
 
 var redux = require('redux');
 var createDevTools = require('redux-devtools').createDevTools;
@@ -49,54 +50,58 @@ var DevTools = createDevTools(
   )
 );
 
+function createStore(program){
+  var init = program.init(program.emptyState);
+  var createStore = DevTools.instrument()(redux.createStore);
+  var store = createStore(program.reducer, init.state);
 
-function ProgramFactory(program, name, duplicateStore){
-  if(duplicateStore === undefined){
-    duplicateStore = false;
+  function reset(){
+    store.dispatch({type: 'cacheUpdate[' + name + ']', updatedState: init.state});
   }
+  reset();
+  return {
+    init: init,
+    store : store,
+    reset: reset
+  };
+}
 
-  function createStore(){
-    var init = program.init(program.emptyState);
+var defaultOptions = {
+  attachDebugger: true
+, attachHeader: true
+, duplicateStore: false
+};
 
-    var store = DevTools.instrument()(redux.createStore)(program.reducer, init.state);
-    var root = null;
-
-    function reset(){
-      store.dispatch({type: 'cacheUpdate[' + name + ']', updatedState: init.state});
-      var execute = program.execute(store, init.ids);
-      if(execute.length > 0){
-        root = execute[0].value
-      }
-    }
-    reset();
-    return {
-      store : store,
-      reset: reset,
-      root: root
-    };
-  }
+function ProgramFactory(program, name, options){
+  var options = _.assign({}, defaultOptions, options === undefined ? {} : options);
 
   var store;
-  if(!duplicateStore){
-    store = createStore()
+  if(options.store !== undefined){
+    store = options.store;
+  } else if(!options.duplicateStore){
+    store = createStore(program)
   }
-
   var Program = Class(React.Component, {
     constructor: function Program() {
-      this.store = duplicateStore ? createStore() : store;
+      this.store = store === undefined ? createStore(program) : store;
     },
 
     render: function() {
+      var root;
+      var execute = program.execute(this.store.store, this.store.init.ids);
+      if(execute.length > 0){
+        root = execute[0].value
+      }
 
       return React.createElement(PixieDustProvider
       , {store: this.store.store }
       , React.createElement('div', {className: 'program-container'}
-        , React.createElement(DevTools)
-        , React.createElement('div', {className: 'program-header'}
+        , options.attachDebugger ? React.createElement(DevTools) : null
+        , options.attachHeader ? React.createElement('div', {className: 'program-header'}
           , React.createElement('h2', {className: 'program-name'}, name)
           , React.createElement('button', {className: 'program-reset-button', onClick: this.store.reset}, 'Reset')
-          )
-        , React.createElement('div', {className: name}, this.store.root)
+          ) : null
+        , React.createElement('div', {className: name}, root)
         )
       );
     }
@@ -105,4 +110,7 @@ function ProgramFactory(program, name, duplicateStore){
 
   return Program;
 }
-module.exports = ProgramFactory;
+module.exports = {
+  ProgramFactory: ProgramFactory
+, createStore: createStore
+};

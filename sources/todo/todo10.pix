@@ -1,0 +1,6 @@
+action clearCompleted(){
+  list { todos = todos \ finishedTodos }
+}
+
+if(list.finishedTodos.count() > 0)
+  a[onClick=clearCompleted()]{ "Clear completed" }

@@ -672,71 +672,96 @@ module.exports.reducer = reducer;
 var Component =  ( function () {
         var oldScope = scope;
         return {
-          Add : Lifted(function Add(props,state,store) {
-                  var scope = _.assign({
-                  },oldScope,props);
-                  var _0 = React.createElement("button",{
-                    onClick : scope["reset"]()
-                  },"Reset");
-                  var _3 = getAdd_lhs(state,scope.add);
-                  var _4 ;
-                  if(_3 != null) {
-                    var calc = calculateCounter_value(state,_3);
-                    state = calc.state;
-                    _4 = calc.result;
-                  } else {
-                    _4 = null;
-                  }
-                  var _2 = React.createElement(imports["pixiedust/components/native/inputs"].IntInput,{
-                    value$identity :  ( function () {
-                            var _0 = getAdd_lhs(state,scope.add);
-                            return _0;
-                        } ) (),
-                    value$setter : actionCreators["setCounter_value"],
-                    value : _4
-                  });
-                  var _6 = getAdd_rhs(state,scope.add);
-                  var _7 ;
-                  if(_6 != null) {
-                    var calc = calculateCounter_value(state,_6);
-                    state = calc.state;
-                    _7 = calc.result;
-                  } else {
-                    _7 = null;
-                  }
-                  var _5 = React.createElement(imports["pixiedust/components/native/inputs"].IntInput,{
-                    value$identity :  ( function () {
-                            var _0 = getAdd_rhs(state,scope.add);
-                            return _0;
-                        } ) (),
-                    value$setter : actionCreators["setCounter_value"],
-                    value : _7
-                  });
-                  var _8 ;
-                  if(scope.add != null) {
-                    var calc = calculateAdd_value(state,scope.add);
-                    state = calc.state;
-                    _8 = calc.result;
-                  } else {
-                    _8 = null;
-                  }
-                  return {
-                    result : React.createElement('group',{
-                    },_0,_2,"+",_5,"=",_8),
-                    state : state
-                  };
-              },["reset"]),
-          Counter : Lifted(function Counter(props,state,store) {
+          Counter : Lifted(function Counter(props,state) {
                   var scope = _.assign({
                   },oldScope,props);
                   return {
                     result : null,
                     state : state
                   };
-              },["increment"])
+              },["increment"]),
+          Add : Lifted(function Add(props,state) {
+                  var scope = _.assign({
+                  },oldScope,props);
+                  var _2 = React.createElement("button",{
+                    onClick : scope["reset"]()
+                  },"Reset");
+                  var _0 = React.createElement("div",{
+                  },_2);
+                  var _7 = getAdd_lhs(state,scope.add);
+                  var _8 ;
+                  if(_7 != null) {
+                    var calc = calculateCounter_value(state,_7);
+                    state = calc.state;
+                    _8 = calc.result;
+                  } else {
+                    _8 = null;
+                  }
+                  var _6 = React.createElement(imports["pixiedust/components/native/inputs"].IntInput,{
+                    value$identity :  ( function () {
+                            var _0 = getAdd_lhs(state,scope.add);
+                            return _0;
+                        } ) (),
+                    value$setter : actionCreators["setCounter_value"],
+                    value : _8
+                  });
+                  var _4 = React.createElement("div",{
+                  },_6,"+");
+                  var _12 = getAdd_rhs(state,scope.add);
+                  var _13 ;
+                  if(_12 != null) {
+                    var calc = calculateCounter_value(state,_12);
+                    state = calc.state;
+                    _13 = calc.result;
+                  } else {
+                    _13 = null;
+                  }
+                  var _11 = React.createElement(imports["pixiedust/components/native/inputs"].IntInput,{
+                    value$identity :  ( function () {
+                            var _0 = getAdd_rhs(state,scope.add);
+                            return _0;
+                        } ) (),
+                    value$setter : actionCreators["setCounter_value"],
+                    value : _13
+                  });
+                  var _9 = React.createElement("div",{
+                  },_11,"=");
+                  var _16 ;
+                  if(scope.add != null) {
+                    var calc = calculateAdd_value(state,scope.add);
+                    state = calc.state;
+                    _16 = calc.result;
+                  } else {
+                    _16 = null;
+                  }
+                  var _14 = React.createElement("div",{
+                  },_16);
+                  return {
+                    result : React.createElement('group',{
+                    },_0,_4,_9,_14),
+                    state : state
+                  };
+              },["reset"])
         };
     } ) ();
 module.exports.Component = Component;
+function Counter_increment(state,action) {
+  var newState = state;
+  scoped(scope,_.assign({
+  },action.props,{
+    by : action.args[0]
+  }),function (scope) {
+          scoped(scope,{
+            $this : scope.c
+          },function (scope) {
+                  var _1 = scope.value !== null && scope.by !== null ? scope.value + scope.by : null;
+                  newState = setCounter_value(newState,scope["$this"],_1);
+              });
+      });
+  return newState;
+}
+
+actions["Counter_increment"] = Counter_increment;
 function Add_reset(state,action) {
   var newState = state;
   scoped(scope,_.assign({
@@ -763,20 +788,3 @@ function Add_reset(state,action) {
 }
 
 actions["Add_reset"] = Add_reset;
-function Counter_increment(state,action) {
-  var newState = state;
-  scoped(scope,_.assign({
-  },action.props,{
-    by : action.args[0]
-  }),function (scope) {
-          scoped(scope,{
-            $this : scope.c
-          },function (scope) {
-                  var _1 = scope.value !== null && scope.by !== null ? scope.value + scope.by : null;
-                  newState = setCounter_value(newState,scope["$this"],_1);
-              });
-      });
-  return newState;
-}
-
-actions["Counter_increment"] = Counter_increment;

@@ -1,0 +1,11 @@
+component TodoItem(todo: Todo){
+  li {
+    @BooleanInput(todo.finished)
+    @FocusStringInput(todo.task)
+    button[onClick=removeTodo()]
+  }
+
+  action removeTodo(){
+    todo.list { todos = todos \ todo }
+  }
+}

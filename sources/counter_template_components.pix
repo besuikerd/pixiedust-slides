@@ -1,0 +1,29 @@
+model
+  entity Counter {
+    value: Int = 0 (default)
+  }
+
+  entity Add {
+    value: Int = lhs.value + rhs.value
+    equation: View = span { lhs.value " + " rhs.value " = " value }
+  }
+
+  relation Add.lhs 1 <-> Counter.inverseLhs
+  relation Add.rhs 1 <-> Counter.inverseRhs
+
+
+view
+  component Counter(c: Counter){
+    div {
+      button { "+" }
+      span { value }
+      button { "-" }
+    }
+  }
+
+  component Add(add: Add){
+    @Counter(add.lhs)
+    @Counter(add.rhs)
+    add.equation
+  }
+

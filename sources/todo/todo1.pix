@@ -1,0 +1,8 @@
+entity TodoList{ }
+
+entity Todo {
+  task     : String
+  finished : Boolean
+}
+
+relation TodoList.todos * <-> 1 Todo.list
