@@ -304,8 +304,6 @@ view
         )
       }
       
-      slideshow { current = immutable1 }
-      
       getter: Slide {
         slideshow = slideshow
         previous = immutable3
@@ -554,26 +552,26 @@ view
         content = @CodeBlockFetch("pix", "sources/slideshow/slideshow_footer.pix")
       }
       
-      slides: Slide {
+      slidesExamples: Slide {
         slideshow = slideshow
         previous = slideshow4
-        title = "Slides"
+        title = "Slideshow"
+        content = @CodeBlockFetch("pix", "sources/slideshow/slideshow_examples.pix")
+      }
+      
+      slidesInSlides: Slide {
+        slideshow = slideshow
+        previous = slidesExamples
+        title = "Slideshow"
         content = @TwoColumn(
           @SlidesExample()
         , @SlidesExample()
         )
       }
       
-      slidesExamples: Slide {
-        slideshow = slideshow
-        previous = slides
-        title = "Slides"
-        content = @CodeBlockFetch("pix", "sources/slideshow/slideshow_examples.pix")
-      }
-      
       grades: Slide {
         slideshow = slideshow
-        previous = slidesExamples
+        previous = slidesInSlides
         title = "Grades"
         content = @TwoColumn(
           @CodeBlockFetchSmall("pix", "examples/grades/grades.ice")

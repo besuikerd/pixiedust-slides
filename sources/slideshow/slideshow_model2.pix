@@ -10,6 +10,7 @@ entity Slide {
   slidesLeft: Int = 1 + next.slidesLeft <+ 0
 }
 
+relation Slide.next ? <-> ? Slide.previous
 relation Slide.slideshow 1 <-> * SlideShow.slides
 relation SlideShow.current ? <-> ? Slide.inverseCurrent
 
